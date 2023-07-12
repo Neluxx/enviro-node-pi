@@ -9,8 +9,8 @@ __license__ = "MIT"
 
 
 from dotenv import load_dotenv
-from .src.sensor_data import SensorData
-from .src.db_conn import DatabaseConnection
+from src.sensor_data import SensorData
+from src.db_conn import DatabaseConnection
 
 
 def run():
