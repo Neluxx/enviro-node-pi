@@ -4,25 +4,20 @@ Sensor Data
 """
 
 import mh_z19
-from db_conn import DatabaseConnection
 from datetime import datetime
 
 
-def get_sensor_data():
-    """Get data from sensor"""
+class SensorData:
+    """Sensor Data Class"""
 
-    data = mh_z19.read_all()
-    save_sensor_data(data)
+    def get_data(self):
+        """Get data from sensor"""
 
+        sensor_data = mh_z19.read_all()
 
-def save_sensor_data(data):
-    """Save sensor data into database"""
+        data = {
+            "value": sensor_data["co2"],
+            "created": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        }
 
-    data = {
-        "value": data["co2"],
-        "created": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-    }
-
-    db_conn = DatabaseConnection()
-    db_conn.insert_data(data)
-    db_conn.close_connection()
+        return data

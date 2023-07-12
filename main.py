@@ -9,15 +9,22 @@ __license__ = "MIT"
 
 
 from dotenv import load_dotenv
-from src.sensor_data import get_sensor_data
+from .src.sensor_data import SensorData
+from .src.db_conn import DatabaseConnection
 
 
-def main():
+def run():
     """Main Method"""
 
     load_dotenv()
-    get_sensor_data()
+    sensor_data = SensorData()
+    data = sensor_data.get_data()
+
+    db_conn = DatabaseConnection()
+    db_conn.insert_data(data)
+
+    db_conn.close_connection()
 
 
 if __name__ == "__main__":
-    main()
+    run()
