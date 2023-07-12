@@ -10,8 +10,9 @@ __license__ = "MIT"
 
 import os
 import mh_z19
-import mariadb
+import mysql.connector
 from datetime import datetime
+from dotenv import load_dotenv
 
 
 def get_sensor_data():
@@ -51,14 +52,15 @@ def create_database_connection():
     """Create database connection"""
 
     try:
-        return mariadb.connect(
+        load_dotenv()
+        return mysql.connector.connect(
             host=os.getenv("HOST"),
             user=os.getenv("USERNAME"),
             password=os.getenv("PASSWORD"),
             database=os.getenv("DATABASE"),
         )
-    except mariadb.Error as exception:
-        print(f"Error connecting to MariaDB Platform: {exception}")
+    except ConnectionError:
+        print("Error connecting to database")
 
 
 if __name__ == "__main__":
