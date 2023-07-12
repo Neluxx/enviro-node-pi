@@ -10,8 +10,8 @@ __license__ = "MIT"
 
 import os
 import mh_z19
+import mariadb
 from datetime import datetime
-import mysql.connector
 
 
 def get_sensor_data():
@@ -35,27 +35,30 @@ def save_sensor_data(data):
 def insert_sensor_data(data):
     """Insert sensor data to database"""
 
-    dbconnect = create_database_connection()
+    conn = create_database_connection()
 
-    cursor = dbconnect.cursor()
+    cursor = conn.cursor()
 
     sql = "INSERT INTO co2 (value, created) VALUES (%s, %s)"
     val = (data["value"], data["created"])
     cursor.execute(sql, val)
 
-    dbconnect.commit()
-    dbconnect.close()
+    conn.commit()
+    conn.close()
 
 
 def create_database_connection():
     """Create database connection"""
 
-    return mysql.connector.connect(
-        host=os.getenv("HOST"),
-        user=os.getenv("USERNAME"),
-        password=os.getenv("PASSWORD"),
-        database=os.getenv("DATABASE"),
-    )
+    try:
+        return mariadb.connect(
+            host=os.getenv("HOST"),
+            user=os.getenv("USERNAME"),
+            password=os.getenv("PASSWORD"),
+            database=os.getenv("DATABASE"),
+        )
+    except mariadb.Error as exception:
+        print(f"Error connecting to MariaDB Platform: {exception}")
 
 
 if __name__ == "__main__":
