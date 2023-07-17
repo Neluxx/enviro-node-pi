@@ -18,8 +18,8 @@ class SensorData:
         self.i2c = I2C(board.SCL, board.SDA)
         self.bme680 = adafruit_bme680.Adafruit_BME680_I2C(self.i2c, debug=False)
 
-        self.temperature_offset = -5
-        self.bme680.sea_level_pressure = 1015
+        self.temperature_offset = -7.5
+        self.bme680.sea_level_pressure = 1013.25
 
     def get_data(self):
         """Get data from sensors"""
