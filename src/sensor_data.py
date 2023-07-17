@@ -14,29 +14,25 @@ class SensorData:
     """Sensor Data Class"""
 
     def __init__(self):
-        self.temperature_offset = 0
+        self.mhz19 = mh_z19.read_all()
         self.i2c = I2C(board.SCL, board.SDA)
         self.bme680 = adafruit_bme680.Adafruit_BME680_I2C(self.i2c, debug=False)
 
-    def get_data(self):
-        """Get data from sensor"""
+        self.temperature_offset = -5
+        self.bme680.sea_level_pressure = 1015
 
-        sensor_data = mh_z19.read_all()
+    def get_data(self):
+        """Get data from sensors"""
 
         data = {
-            "value": sensor_data["co2"],
+            "temperature": self.bme680.temperature + self.temperature_offset,
+            "relative_humidity": self.bme680.relative_humidity,
+            "humidity": self.bme680.humidity,
+            "pressure": self.bme680.pressure,
+            "altitude": self.bme680.altitude,
+            "gas": self.bme680.gas,
+            "co2": self.mhz19["co2"],
             "created": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         }
 
         return data
-
-    def print_bme680_data(self):
-        """Print data from BME680 sensor"""
-
-        print(
-            "Temperature: %0.1f C" % (self.bme680.temperature + self.temperature_offset)
-        )
-        print("Gas: %d ohm" % self.bme680.gas)
-        print("Humidity: %0.1f %%" % self.bme680.relative_humidity)
-        print("Pressure: %0.3f hPa" % self.bme680.pressure)
-        print("Altitude = %0.2f meters" % self.bme680.altitude)
