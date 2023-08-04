@@ -20,7 +20,7 @@ def run():
     load_dotenv()
 
     open_weather = OpenWeather()
-    sea_level_pressure = open_weather.get_sea_level_pressure
+    sea_level_pressure = open_weather.get_sea_level_pressure()
 
     sensor_data = SensorData(sea_level_pressure)
     data = sensor_data.get_data()
