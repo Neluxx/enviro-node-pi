@@ -20,14 +20,17 @@ def run():
     load_dotenv()
 
     open_weather = OpenWeather()
-    sea_level_pressure = open_weather.get_sea_level_pressure()
+    open_weather_data = open_weather.get_data()
 
-    sensor_data = SensorData(sea_level_pressure)
+    db_conn = DatabaseConnection('open_weather_data')
+    db_conn.insert_open_weather_data(open_weather_data)
+    db_conn.close_connection()
+
+    sensor_data = SensorData()
     data = sensor_data.get_data()
 
-    db_conn = DatabaseConnection()
-    db_conn.insert_data(data)
-
+    db_conn = DatabaseConnection('sensor_data')
+    db_conn.insert_sensor_data(data)
     db_conn.close_connection()
 
 
