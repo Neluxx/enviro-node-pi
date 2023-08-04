@@ -10,6 +10,7 @@ __license__ = "MIT"
 
 from dotenv import load_dotenv
 from src.sensor_data import SensorData
+from src.open_weather import OpenWeather
 from src.db_conn import DatabaseConnection
 
 
@@ -17,7 +18,11 @@ def run():
     """Main Method"""
 
     load_dotenv()
-    sensor_data = SensorData()
+
+    open_weather = OpenWeather()
+    sea_level_pressure = open_weather.get_sea_level_pressure
+
+    sensor_data = SensorData(sea_level_pressure)
     data = sensor_data.get_data()
 
     db_conn = DatabaseConnection()
