@@ -9,7 +9,7 @@ __license__ = "MIT"
 
 
 from dotenv import load_dotenv
-from src.sensor_data import SensorData
+from src.sensor import Sensor
 from src.open_weather import OpenWeather
 from src.db_conn import DatabaseConnection
 
@@ -26,11 +26,11 @@ def run():
     db_conn.insert_open_weather_data(open_weather_data)
     db_conn.close_connection()
 
-    sensor_data = SensorData()
-    data = sensor_data.get_data()
+    sensor = Sensor()
+    sensor_data = sensor.get_data()
 
     db_conn = DatabaseConnection('sensor_data')
-    db_conn.insert_sensor_data(data)
+    db_conn.insert_sensor_data(sensor_data)
     db_conn.close_connection()
 
 

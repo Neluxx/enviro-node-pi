@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
 """
-Sensor Data
+Sensor
 """
 
 import board
 import mh_z19
 from busio import I2C
 import adafruit_bme680
-from datetime import datetime
 
 
-class SensorData:
-    """Sensor Data Class"""
+class Sensor:
+    """Sensor Class"""
 
     def __init__(self):
         self.mhz19 = mh_z19.read_all()
@@ -32,7 +31,6 @@ class SensorData:
             "altitude": self.bme680.altitude,
             "gas": self.bme680.gas,
             "co2": self.mhz19["co2"],
-            "created": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         }
 
         return data
