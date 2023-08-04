@@ -12,14 +12,13 @@ class OpenWeather:
 
     def __init__(self):
         self.api_key = os.getenv("API_KEY")
+        self.city_name = os.getenv("CITY_NAME")
 
     def get_data(self):
         """Get response from open weather map"""
 
-        unit = "metric"
-        city_name = "Münchenstein,Switzerland"
         base_url = "https://api.openweathermap.org/data/2.5/weather"
-        params = {"q": city_name, "appid": self.api_key, "units": unit}
+        params = {"q": self.city_name, "appid": self.api_key, "units": "metric"}
 
         try:
             response = requests.get(base_url, params=params)
