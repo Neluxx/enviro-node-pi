@@ -25,7 +25,7 @@ class OpenWeather:
             data = response.json()
 
             if response.status_code == 200:
-                sea_level_pressure = data["main"]["sea_level"]
+                sea_level_pressure = data["main"]["pressure"]
                 return sea_level_pressure
 
             else:
