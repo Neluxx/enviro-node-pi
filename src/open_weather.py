@@ -13,7 +13,7 @@ class OpenWeather:
     def __init__(self):
         self.api_key = os.getenv("API_KEY")
 
-    def get_sea_level_pressure(self):
+    def get_data(self):
         """Get response from open weather map"""
 
         unit = "metric"
@@ -26,8 +26,7 @@ class OpenWeather:
             data = response.json()
 
             if response.status_code == 200:
-                sea_level_pressure = data["main"]["pressure"]
-                return sea_level_pressure
+                return data
 
             else:
                 print("Fehler beim Abrufen der Daten. Statuscode:", response.status_code)
