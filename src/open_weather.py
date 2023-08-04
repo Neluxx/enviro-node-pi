@@ -16,9 +16,10 @@ class OpenWeather:
     def get_sea_level_pressure(self):
         """Get response from open weather map"""
 
+        unit = "metric"
         city_name = "Münchenstein,Switzerland"
         base_url = "https://api.openweathermap.org/data/2.5/weather"
-        params = {"q": city_name, "appid": self.api_key}
+        params = {"q": city_name, "appid": self.api_key, "units": unit}
 
         try:
             response = requests.get(base_url, params=params)
