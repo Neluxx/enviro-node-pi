@@ -19,17 +19,14 @@ def run():
 
     load_dotenv()
 
-    open_weather = OpenWeather()
-    open_weather_data = open_weather.get_data()
-
-    db_conn = DatabaseConnection('open_weather_data')
-    db_conn.insert_open_weather_data(open_weather_data)
-    db_conn.close_connection()
-
     sensor = Sensor()
     sensor_data = sensor.get_data()
 
-    db_conn = DatabaseConnection('sensor_data')
+    open_weather = OpenWeather()
+    open_weather_data = open_weather.get_data()
+
+    db_conn = DatabaseConnection()
+    db_conn.insert_open_weather_data(open_weather_data)
     db_conn.insert_sensor_data(sensor_data)
     db_conn.close_connection()
 

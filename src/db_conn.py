@@ -11,18 +11,17 @@ from datetime import datetime
 class DatabaseConnection:
     """Database Connection Class"""
 
-    def __init__(self, database):
-        self.conn = self.create_connection(database)
-        self.created = datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+    def __init__(self):
+        self.conn = self.create_connection()
 
-    def create_connection(self, database):
+    def create_connection(self):
         """Create database connection"""
 
         conn = mysql.connector.connect(
             host = os.getenv("HOST"),
             user = os.getenv("USERNAME"),
             password = os.getenv("PASSWORD"),
-            database = database,
+            database = os.getenv("DATABASE"),
         )
 
         if conn is None:
@@ -45,7 +44,7 @@ class DatabaseConnection:
             data["altitude"],
             data["gas"],
             data["co2"],
-            self.created,
+            datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         )
 
         cursor.execute(sql, values)
@@ -73,7 +72,7 @@ class DatabaseConnection:
             data["wind"]["speed"],
             data["wind"]["deg"],
             data["clouds"]["all"],
-            self.created,
+            datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         )
 
         cursor.execute(sql, values)
