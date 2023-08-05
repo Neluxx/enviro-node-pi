@@ -12,8 +12,7 @@ import time
 def run():
     """Main Method"""
 
-    secondary_address = bme680.I2C_ADDR_SECONDARY
-    sensor = bme680.BME680(secondary_address)
+    sensor = bme680.BME680(bme680.I2C_ADDR_SECONDARY)
 
     sensor.set_humidity_oversample(bme680.OS_2X)
     sensor.set_pressure_oversample(bme680.OS_4X)
@@ -37,17 +36,17 @@ def run():
 
     # Create sensor object, communicating over the board's default I2C bus
     i2c = board.I2C()   # uses board.SCL and board.SDA
-    bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c)
+    ada_bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c)
 
     # change this to match the location's pressure (hPa) at sea level
-    bme680.sea_level_pressure = 1013.25
+    ada_bme680.sea_level_pressure = 1013.25
 
     print("Adafruit BME680")
-    print("\nTemperature: %0.1f C" % bme680.temperature)
-    print("Gas: %d ohm" % bme680.gas)
-    print("Humidity: %0.1f %%" % bme680.relative_humidity)
-    print("Pressure: %0.3f hPa" % bme680.pressure)
-    print("Altitude = %0.2f meters" % bme680.altitude)
+    print("\nTemperature: %0.1f C" % ada_bme680.temperature)
+    print("Gas: %d ohm" % ada_bme680.gas)
+    print("Humidity: %0.1f %%" % ada_bme680.relative_humidity)
+    print("Pressure: %0.3f hPa" % ada_bme680.pressure)
+    print("Altitude = %0.2f meters" % ada_bme680.altitude)
 
 
 if __name__ == "__main__":
