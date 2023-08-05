@@ -12,7 +12,8 @@ import time
 def run():
     """Main Method"""
 
-    sensor = bme680.BME680(bme680.I2C_ADDR_SECONDARY)
+    secondary_address = bme680.I2C_ADDR_SECONDARY
+    sensor = bme680.BME680(secondary_address)
 
     sensor.set_humidity_oversample(bme680.OS_2X)
     sensor.set_pressure_oversample(bme680.OS_4X)
