@@ -47,3 +47,7 @@ def run():
     print("Humidity: %0.1f %%" % bme680.relative_humidity)
     print("Pressure: %0.3f hPa" % bme680.pressure)
     print("Altitude = %0.2f meters" % bme680.altitude)
+
+
+if __name__ == "__main__":
+    run()
