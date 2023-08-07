@@ -3,10 +3,8 @@
 Sensor
 """
 
-import board
 import mh_z19
-from busio import I2C
-import adafruit_bme680
+import bme680
 
 
 class Sensor:
@@ -14,22 +12,20 @@ class Sensor:
 
     def __init__(self):
         self.mhz19 = mh_z19.read_all()
-        self.i2c = I2C(board.SCL, board.SDA)
-        self.bme680 = adafruit_bme680.Adafruit_BME680_I2C(self.i2c, debug=False)
+        self.bme680 = bme680.BME680(bme680.I2C_ADDR_SECONDARY)
 
-        self.temperature_offset = -7.5
-        self.bme680.sea_level_pressure = 1013.25
+        self.bme680.set_humidity_oversample(bme680.OS_2X)
+        self.bme680.set_pressure_oversample(bme680.OS_4X)
+        self.bme680.set_temperature_oversample(bme680.OS_8X)
+        self.bme680.set_filter(bme680.FILTER_SIZE_3)
 
     def get_data(self):
         """Get data from sensors"""
 
         data = {
-            "temperature": self.bme680.temperature + self.temperature_offset,
-            "relative_humidity": self.bme680.relative_humidity,
-            "humidity": self.bme680.humidity,
-            "pressure": self.bme680.pressure,
-            "altitude": self.bme680.altitude,
-            "gas": self.bme680.gas,
+            "temperature": self.bme680.data.temperature,
+            "humidity": self.bme680.data.humidity,
+            "pressure": self.bme680.data.pressure,
             "co2": self.mhz19["co2"],
         }
 

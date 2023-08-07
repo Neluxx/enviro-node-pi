@@ -34,15 +34,12 @@ class DatabaseConnection:
         """Insert sensor data to database"""
 
         cursor = self.conn.cursor()
-        sql = "INSERT INTO sensor_data (temperature, relative_humidity, humidity, pressure, altitude, gas, co2, created) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+        sql = "INSERT INTO sensor_data (temperature, humidity, pressure, co2, created) VALUES (%s, %s, %s, %s, %s)"
 
         values = (
             data["temperature"],
-            data["relative_humidity"],
             data["humidity"],
             data["pressure"],
-            data["altitude"],
-            data["gas"],
             data["co2"],
             datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         )
