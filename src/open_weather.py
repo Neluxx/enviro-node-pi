@@ -5,6 +5,7 @@ Open Weather Map
 
 import os
 import requests
+import logging
 
 
 class OpenWeather:
@@ -37,6 +38,6 @@ class OpenWeather:
                 return data
 
         except requests.RequestException as exception:
-            print("Fehler bei der Anfrage:", exception)
+            logging.error("Fehler bei der Anfrage:", exception)
 
         return {}
