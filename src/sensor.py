@@ -10,7 +10,7 @@ import bme680
 class Sensor:
     """Sensor Class"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.mhz19 = mh_z19.read_all()
         self.bme680 = bme680.BME680(bme680.I2C_ADDR_SECONDARY)
 
@@ -19,10 +19,10 @@ class Sensor:
         self.bme680.set_temperature_oversample(bme680.OS_8X)
         self.bme680.set_filter(bme680.FILTER_SIZE_3)
 
-    def get_data(self):
+    def get_data(self) -> dict:
         """Get data from sensors"""
 
-        data = {
+        data: dict = {
             "temperature": self.bme680.data.temperature,
             "humidity": self.bme680.data.humidity,
             "pressure": self.bme680.data.pressure,

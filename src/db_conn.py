@@ -18,10 +18,10 @@ class DatabaseConnection:
         """Create database connection"""
 
         conn = mysql.connector.connect(
-            host = os.getenv("HOST"),
-            user = os.getenv("USERNAME"),
-            password = os.getenv("PASSWORD"),
-            database = os.getenv("DATABASE"),
+            host=os.getenv("HOST"),
+            user=os.getenv("USERNAME"),
+            password=os.getenv("PASSWORD"),
+            database=os.getenv("DATABASE"),
         )
 
         if conn is None:
