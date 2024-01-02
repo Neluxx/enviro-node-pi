@@ -1,5 +1,10 @@
-import mh_z19
-import bme680
+try:
+    import mh_z19
+    import bme680
+except ImportError:
+    # Mock-Module oder Dummy-Module können hier zugewiesen werden, wenn sie für Tests benötigt werden.
+    mh_z19 = None
+    bme680 = None
 
 from django.utils import timezone
 
