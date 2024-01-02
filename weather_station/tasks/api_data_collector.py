@@ -1,4 +1,4 @@
-from apps.api.services import OpenWeather
+from weather_station.apps.api.services import OpenWeather
 
 
 class ApiDataCollector:
