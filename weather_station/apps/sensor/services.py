@@ -1,6 +1,6 @@
 try:
-    import mh_z19
-    import bme680
+    import mh_z19  # type: ignore
+    import bme680  # type: ignore
 except ImportError:
     # Mock-Module oder Dummy-Module können hier zugewiesen werden, wenn sie für Tests benötigt werden.
     mh_z19 = None
