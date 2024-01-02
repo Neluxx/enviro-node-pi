@@ -1,4 +1,4 @@
-from weather_station.apps.sensor.services import Sensor
+from apps.sensor.services import Sensor
 
 
 class SensorDataCollector:
