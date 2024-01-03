@@ -39,6 +39,7 @@ DEBUG = True
 ALLOWED_HOSTS: List = []
 
 TIME_ZONE = "Europe/Berlin"
+USE_TZ = True
 
 # Application definition
 
