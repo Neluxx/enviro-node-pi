@@ -2,7 +2,6 @@ import requests
 import logging
 
 from django.conf import settings
-from django.utils import timezone
 
 from .models import OutdoorWeatherData
 
@@ -52,5 +51,4 @@ class OpenWeather:
             wind_speed=data["wind"]["speed"],
             wind_deg=data["wind"]["deg"],
             clouds=data["clouds"]["all"],
-            created=timezone.now(),
         ).save()

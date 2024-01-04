@@ -6,8 +6,6 @@ except ImportError:
     mh_z19 = None
     bme680 = None
 
-from django.utils import timezone
-
 from .models import IndoorSensorData
 
 
@@ -41,5 +39,4 @@ class Sensor:
             humidity=data["humidity"],
             pressure=data["pressure"],
             co2=data["co2"],
-            created=timezone.now(),
         ).save()

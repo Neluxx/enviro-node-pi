@@ -15,4 +15,4 @@ class OutdoorWeatherData(models.Model):
     wind_speed = models.DecimalField(max_digits=15, decimal_places=2)
     wind_deg = models.IntegerField()
     clouds = models.IntegerField()
-    created = models.DateTimeField()
+    created = models.DateTimeField(auto_now_add=True)
