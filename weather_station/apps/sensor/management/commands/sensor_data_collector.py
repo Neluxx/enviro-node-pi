@@ -20,6 +20,6 @@ class Command(BaseCommand):
             "Luftqualität ist schlecht",
             f'Die CO2-Konzentration in der Luft beträgt {sensor_data["co2"]}. Es wird Zeit zu lüften.',
             "fabian.arndt96@proton.me",
-            ["fabian.arndt96@proton.me"],
+            ["fabian.arndt96@proton.me", "sukathrin@web.de"],
             fail_silently=False,
         )
