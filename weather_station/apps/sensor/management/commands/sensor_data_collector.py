@@ -12,7 +12,7 @@ class Command(BaseCommand):
         sensor_data = sensor.get_data()
         sensor.save_data(sensor_data)
 
-        if sensor_data["co2"] >= 1200:
+        if sensor_data["co2"] >= 1000:
             self.send_mail(sensor_data)
 
     def send_mail(self, sensor_data: dict) -> None:
