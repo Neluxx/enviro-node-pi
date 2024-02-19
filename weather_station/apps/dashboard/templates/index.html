@@ -1,1 +1,10 @@
-<p>Hello World</p>
+{% comment %} <form method="get">
+    <select name="filter_option" onchange="this.form.submit()">
+        <option value="day">Tag</option>
+        <option value="week">Woche</option>
+        <option value="month">Monat</option>
+        <option value="year">Jahr</option>
+    </select>
+</form> {% endcomment %}
+
+{{ chart|safe }}
