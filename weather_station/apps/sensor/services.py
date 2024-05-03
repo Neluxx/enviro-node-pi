@@ -40,3 +40,6 @@ class Sensor:
             pressure=data["pressure"],
             co2=data["co2"],
         ).save()
+
+    def get_last_entry(self) -> dict:
+        return IndoorSensorData().objects.latest('created')
