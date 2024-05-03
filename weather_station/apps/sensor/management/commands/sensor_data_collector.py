@@ -11,14 +11,14 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         sensor = Sensor()
         actual_sensor_data = sensor.get_data()
-        # last_sensor_data = IndoorSensorData().objects.latest("created")
+        last_sensor_data = IndoorSensorData.objects.latest("created")
         sensor.save_data(actual_sensor_data)
 
-        if actual_sensor_data["co2"] >= 1000:
+        if actual_sensor_data["co2"] >= 1000 and last_sensor_data["co2"] < 1000:
             self.send_warning_mail(actual_sensor_data)
 
-        # if actual_sensor_data["co2"] < 1000 and last_sensor_data["co2"] >= 1000:
-        #     self.send_recovery_mail()
+        if actual_sensor_data["co2"] < 1000 and last_sensor_data["co2"] >= 1000:
+            self.send_recovery_mail()
 
     def send_warning_mail(self, actual_sensor_data: dict) -> None:
         send_mail(
@@ -32,7 +32,7 @@ class Command(BaseCommand):
     def send_recovery_mail(self) -> None:
         send_mail(
             "Luftqualität hat sich verbessert",
-            f"Die CO2-Konzentration ist unter den Schwellenwert gesunken. Du kannst die Fenster wieder schliessen.",
+            "Die CO2-Konzentration ist unter den Schwellenwert gesunken. Du kannst die Fenster wieder schliessen.",
             "mail@fabian-arndt.dev",
             ["fabian.arndt96@proton.me", "sukathrin@web.de"],
             fail_silently=False,
