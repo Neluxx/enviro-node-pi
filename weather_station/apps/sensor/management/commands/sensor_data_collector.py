@@ -33,7 +33,6 @@ class Command(BaseCommand):
         send_mail(
             "Luftqualität hat sich verbessert",
             "Die CO2-Konzentration ist unter den Schwellenwert gesunken. Du kannst die Fenster wieder schliessen.",
-            "Die CO2-Konzentration ist unter den Schwellenwert gesunken. Du kannst die Fenster wieder schliessen.",
             "mail@fabian-arndt.dev",
             ["fabian.arndt96@proton.me", "sukathrin@web.de"],
             fail_silently=False,
