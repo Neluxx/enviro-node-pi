@@ -1,2 +1,2 @@
-# raspberrypi-sensor-api
-A python flask API to retrieve sensor data from the Raspberry Pi
+# enviro-node-pi
+Python Flask application for collecting environmental sensor data on a Raspberry Pi and sending it to a central hub.
