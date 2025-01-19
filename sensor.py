@@ -1,50 +1,56 @@
 class Sensor:
     """Sensor Class"""
 
-    def __init__(self):
-        self.mhz19 = self._get_mhz19_data()
-        self.bme680 = self._get_bme680_instance()
+    MOCK_MHZ19_DATA = {"co2": 450}
+    MOCK_BME680_DATA = {"temperature": 20, "humidity": 40, "pressure": 900}
 
-    def _get_mhz19_data(self):
+    def __init__(self):
+        self.mhz19 = self._initialize_mhz19()
+        self.bme680 = self._initialize_bme680()
+
+    def _initialize_mhz19(self):
+        """Initialize MH-Z19 sensor."""
         try:
             import mh_z19
-
             return mh_z19.read_all()
         except ImportError:
-            # Mock data for testing purposes if mh_z19 is not available
-            return {"co2": 450}
+            # Return mock data if MH-Z19 is unavailable
+            return self.MOCK_MHZ19_DATA
 
-    def _get_bme680_instance(self):
+    def _initialize_bme680(self):
+        """Initialize BME680 sensor."""
         try:
             import bme680
-
-            bme = bme680.BME680(bme680.I2C_ADDR_SECONDARY)
-            bme.set_humidity_oversample(bme680.OS_2X)
-            bme.set_pressure_oversample(bme680.OS_4X)
-            bme.set_temperature_oversample(bme680.OS_8X)
-            bme.set_filter(bme680.FILTER_SIZE_3)
-
-            return bme
+            sensor = bme680.BME680(bme680.I2C_ADDR_SECONDARY)
+            self._configure_bme680(sensor)
+            return sensor
         except ImportError:
-            # Mock data for testing purposes if bme680 is not available
-            class MockBME680:
-                def __init__(self):
-                    self.data = type(
-                        "obj",
-                        (object,),
-                        {"temperature": 20, "humidity": 40, "pressure": 900},
-                    )
+            # Return mock sensor if BME680 is unavailable
+            return self._get_mock_bme680()
 
-            return MockBME680()
+    def _configure_bme680(self, sensor):
+        """Set oversampling and filter configurations for BME680."""
+        sensor.set_humidity_oversample(sensor.OS_2X)
+        sensor.set_pressure_oversample(sensor.OS_4X)
+        sensor.set_temperature_oversample(sensor.OS_8X)
+        sensor.set_filter(sensor.FILTER_SIZE_3)
+
+    def _get_mock_bme680(self):
+        """Create a mock BME680 sensor with predefined data."""
+        class MockBME680:
+            def __init__(self):
+                self.data = type(
+                    "MockData",
+                    (object,),
+                    Sensor.MOCK_BME680_DATA,
+                )()
+        return MockBME680()
 
     def get_data(self):
-        """Get data from sensors"""
-
-        data = {
+        """Get data from sensors."""
+        return {
             "temperature": self.bme680.data.temperature,
             "humidity": self.bme680.data.humidity,
             "pressure": self.bme680.data.pressure,
             "co2": self.mhz19["co2"],
         }
-
-        return data
