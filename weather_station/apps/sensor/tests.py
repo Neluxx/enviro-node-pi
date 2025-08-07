@@ -4,13 +4,13 @@ from apps.sensor.models import IndoorSensorData
 from apps.sensor.services import Sensor
 
 
-@patch("apps.sensor.services.mh_z19", MagicMock())
-@patch("apps.sensor.services.bme680", MagicMock())
+@patch('apps.sensor.services.mh_z19', MagicMock())
+@patch('apps.sensor.services.bme680', MagicMock())
 class SensorTest(TestCase):
     def setUp(self):
         # Konfigurieren der Mock-Objekte
         self.mh_z19_mock = MagicMock()
-        self.mh_z19_mock = {"co2": 400.0}
+        self.mh_z19_mock = {'co2': 400.0}
 
         self.bme680_sensor_mock = MagicMock()
         self.bme680_sensor_mock.data.temperature = 25.0
@@ -22,10 +22,10 @@ class SensorTest(TestCase):
         sensor.mhz19 = self.mh_z19_mock
         sensor.bme680 = self.bme680_sensor_mock
         data = sensor.get_data()
-        self.assertEqual(data["temperature"], 25.0)
-        self.assertEqual(data["humidity"], 50.0)
-        self.assertEqual(data["pressure"], 1013.0)
-        self.assertEqual(data["co2"], 400.0)
+        self.assertEqual(data['temperature'], 25.0)
+        self.assertEqual(data['humidity'], 50.0)
+        self.assertEqual(data['pressure'], 1013.0)
+        self.assertEqual(data['co2'], 400.0)
 
     def test_save_data(self):
         sensor = Sensor()

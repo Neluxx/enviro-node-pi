@@ -25,18 +25,18 @@ class Sensor:
         """Get data from sensors"""
 
         data: dict = {
-            "temperature": self.bme680.data.temperature,
-            "humidity": self.bme680.data.humidity,
-            "pressure": self.bme680.data.pressure,
-            "co2": self.mhz19["co2"],
+            'temperature': self.bme680.data.temperature,
+            'humidity': self.bme680.data.humidity,
+            'pressure': self.bme680.data.pressure,
+            'co2': self.mhz19['co2'],
         }
 
         return data
 
     def save_data(self, data: dict) -> None:
         IndoorSensorData(
-            temperature=data["temperature"],
-            humidity=data["humidity"],
-            pressure=data["pressure"],
-            co2=data["co2"],
+            temperature=data['temperature'],
+            humidity=data['humidity'],
+            pressure=data['pressure'],
+            co2=data['co2'],
         ).save()

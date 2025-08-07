@@ -8,24 +8,24 @@ class OpenWeatherTest(TestCase):
     def setUp(self):
         self.open_weather = OpenWeather()
         self.mock_response = {
-            "main": {
-                "temp": 20,
-                "feels_like": 21,
-                "temp_min": 15,
-                "temp_max": 25,
-                "pressure": 1012,
-                "humidity": 80,
+            'main': {
+                'temp': 20,
+                'feels_like': 21,
+                'temp_min': 15,
+                'temp_max': 25,
+                'pressure': 1012,
+                'humidity': 80,
             },
-            "weather": [
-                {"main": "Clouds", "description": "overcast clouds", "icon": "04n"}
+            'weather': [
+                {'main': 'Clouds', 'description': 'overcast clouds', 'icon': '04n'}
             ],
-            "visibility": 10000,
-            "wind": {"speed": 5.1, "deg": 350},
-            "clouds": {"all": 90},
-            "dt": 1605182400,
+            'visibility': 10000,
+            'wind': {'speed': 5.1, 'deg': 350},
+            'clouds': {'all': 90},
+            'dt': 1605182400,
         }
 
-    @patch("apps.api.services.requests.get")
+    @patch('apps.api.services.requests.get')
     def test_get_data(self, mock_get):
         # Mocking der HTTP-Anfrage
         mock_get.return_value.status_code = 200
@@ -34,7 +34,7 @@ class OpenWeatherTest(TestCase):
         data = self.open_weather.get_data()
         self.assertEqual(data, self.mock_response)
 
-    @patch("apps.api.services.requests.get")
+    @patch('apps.api.services.requests.get')
     def test_save_data(self, mock_get):
         # Mocking der HTTP-Anfrage
         mock_get.return_value.status_code = 200
@@ -50,10 +50,10 @@ class OpenWeatherTest(TestCase):
         self.assertEqual(saved_data.humidity, 80)
         # ... (Überprüfe alle anderen Felder entsprechend)
 
-    @patch("apps.api.services.requests.get")
+    @patch('apps.api.services.requests.get')
     def test_api_error_handling(self, mock_get):
         # Simulieren eines Fehlers bei der API-Anfrage
-        mock_get.side_effect = Exception("API-Anfrage fehlgeschlagen")
+        mock_get.side_effect = Exception('API-Anfrage fehlgeschlagen')
 
         with self.assertRaises(Exception):
             self.open_weather.get_data()
