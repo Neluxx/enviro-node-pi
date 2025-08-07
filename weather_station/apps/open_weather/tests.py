@@ -25,7 +25,7 @@ class OpenWeatherTest(TestCase):
             'dt': 1605182400,
         }
 
-    @patch('apps.api.services.requests.get')
+    @patch('apps.open_weather.services.requests.get')
     def test_get_data(self, mock_get):
         # Mocking der HTTP-Anfrage
         mock_get.return_value.status_code = 200
@@ -34,7 +34,7 @@ class OpenWeatherTest(TestCase):
         data = self.open_weather.get_data()
         self.assertEqual(data, self.mock_response)
 
-    @patch('apps.api.services.requests.get')
+    @patch('apps.open_weather.services.requests.get')
     def test_save_data(self, mock_get):
         # Mocking der HTTP-Anfrage
         mock_get.return_value.status_code = 200
@@ -50,7 +50,7 @@ class OpenWeatherTest(TestCase):
         self.assertEqual(saved_data.humidity, 80)
         # ... (Überprüfe alle anderen Felder entsprechend)
 
-    @patch('apps.api.services.requests.get')
+    @patch('apps.open_weather.services.requests.get')
     def test_api_error_handling(self, mock_get):
         # Simulieren eines Fehlers bei der API-Anfrage
         mock_get.side_effect = Exception('API-Anfrage fehlgeschlagen')

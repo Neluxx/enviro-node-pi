@@ -42,7 +42,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'apps.api',
+    'apps.open_weather',
     'apps.sensor',
     'django.contrib.admin',
     'django.contrib.auth',
