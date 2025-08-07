@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class SensorConfig(AppConfig):
+class PiSensorConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'apps.sensor'
+    name = 'apps.pi_sensor'

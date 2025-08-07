@@ -1,11 +1,11 @@
 from django.test import TestCase
 from unittest.mock import patch, MagicMock
-from apps.sensor.models import IndoorSensorData
-from apps.sensor.services import Sensor
+from apps.pi_sensor.models import IndoorSensorData
+from apps.pi_sensor.services import Sensor
 
 
-@patch('apps.sensor.services.mh_z19', MagicMock())
-@patch('apps.sensor.services.bme680', MagicMock())
+@patch('apps.pi_sensor.services.mh_z19', MagicMock())
+@patch('apps.pi_sensor.services.bme680', MagicMock())
 class SensorTest(TestCase):
     def setUp(self):
         # Konfigurieren der Mock-Objekte

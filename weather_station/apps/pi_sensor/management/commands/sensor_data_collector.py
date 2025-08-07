@@ -1,12 +1,12 @@
 from django.core.management.base import BaseCommand
 from django.core.mail import send_mail
 
-from apps.sensor.services import Sensor
-from apps.sensor.models import IndoorSensorData
+from apps.pi_sensor.services import Sensor
+from apps.pi_sensor.models import IndoorSensorData
 
 
 class Command(BaseCommand):
-    help = 'Get sensor data'
+    help = 'Get pi_sensor data'
 
     def handle(self, *args, **kwargs):
         sensor = Sensor()

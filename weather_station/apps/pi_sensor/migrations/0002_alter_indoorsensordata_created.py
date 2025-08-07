@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sensor', '0001_initial'),
+        ('pi_sensor', '0001_initial'),
     ]
 
     operations = [
