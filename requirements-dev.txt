@@ -1,11 +1,10 @@
-Django>=4.2.0
-auto_mix_prep==0.2.0
-django_environ==0.11.2
-python-dotenv==1.0.0
-requests>=2.31.0
+-r requirements.txt
 
-pytest>=7.0.0
-pytest-django>=4.5.0
-black>=23.0.0
-flake8>=6.0.0
-coverage>=7.0.0
+# Testing
+pytest~=8.4
+pytest-django~=4.11
+coverage~=7.10
+
+# Code Quality
+black~=25.1
+flake8~=7.3

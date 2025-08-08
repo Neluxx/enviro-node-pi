@@ -1,9 +1,5 @@
-Django>=4.2.0
-auto_mix_prep==0.2.0
-django_environ==0.11.2
-python-dotenv==1.0.0
-requests>=2.31.0
+-r requirements.txt
 
-bme680==1.1.1
-board==1.0
-mh_z19==3.1.3
+# Sensors
+bme680~=1.1 # Consider upgrading to version 2.0
+mh_z19~=3.1
