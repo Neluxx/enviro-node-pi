@@ -1,8 +1,8 @@
 from django.core.management.base import BaseCommand
 from django.core.mail import send_mail
 
-from apps.pi_sensor.services import Sensor
-from apps.pi_sensor.models import IndoorSensorData
+from pi_sensor.services import Sensor
+from pi_sensor.models import IndoorSensorData
 
 
 class Command(BaseCommand):

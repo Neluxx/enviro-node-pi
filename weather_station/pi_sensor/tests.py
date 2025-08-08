@@ -1,7 +1,6 @@
 from django.test import TestCase
 from unittest.mock import patch, MagicMock
-from apps.pi_sensor.models import IndoorSensorData
-from apps.pi_sensor.services import Sensor
+from pi_sensor.models import IndoorSensorData
 
 
 @patch('apps.pi_sensor.services.mh_z19', MagicMock())

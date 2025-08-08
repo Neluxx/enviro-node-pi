@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from apps.open_weather.services import OpenWeather
+from open_weather.services import OpenWeather
 
 
 class Command(BaseCommand):

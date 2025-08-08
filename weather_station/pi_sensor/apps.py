@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class OpenWeatherConfig(AppConfig):
+class PiSensorConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'apps.open_weather'
+    name = 'pi_sensor'
