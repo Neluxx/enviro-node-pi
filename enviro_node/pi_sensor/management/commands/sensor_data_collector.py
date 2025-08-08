@@ -4,7 +4,7 @@ from pi_sensor.services import SensorDataReader, SensorDataSaver
 
 
 class Command(BaseCommand):
-    help = 'Get pi_sensor data'
+    help = "Get pi_sensor data"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -3,7 +3,7 @@ from open_weather.services import OpenWeather
 
 
 class Command(BaseCommand):
-    help = 'Get open weather data'
+    help = "Get open weather data"
 
     def handle(self, *args, **kwargs):
         open_weather = OpenWeather()

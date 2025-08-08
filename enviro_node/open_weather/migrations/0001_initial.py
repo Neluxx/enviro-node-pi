@@ -7,28 +7,35 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='OutdoorWeatherData',
+            name="OutdoorWeatherData",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('temperature', models.DecimalField(decimal_places=2, max_digits=15)),
-                ('feels_like', models.DecimalField(decimal_places=2, max_digits=15)),
-                ('temp_min', models.DecimalField(decimal_places=2, max_digits=15)),
-                ('temp_max', models.DecimalField(decimal_places=2, max_digits=15)),
-                ('humidity', models.IntegerField()),
-                ('pressure', models.IntegerField()),
-                ('weather_main', models.CharField(max_length=255)),
-                ('weather_description', models.CharField(max_length=255)),
-                ('weather_icon', models.CharField(max_length=255)),
-                ('visibility', models.IntegerField()),
-                ('wind_speed', models.DecimalField(decimal_places=2, max_digits=15)),
-                ('wind_deg', models.IntegerField()),
-                ('clouds', models.IntegerField()),
-                ('created', models.DateTimeField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("temperature", models.DecimalField(decimal_places=2, max_digits=15)),
+                ("feels_like", models.DecimalField(decimal_places=2, max_digits=15)),
+                ("temp_min", models.DecimalField(decimal_places=2, max_digits=15)),
+                ("temp_max", models.DecimalField(decimal_places=2, max_digits=15)),
+                ("humidity", models.IntegerField()),
+                ("pressure", models.IntegerField()),
+                ("weather_main", models.CharField(max_length=255)),
+                ("weather_description", models.CharField(max_length=255)),
+                ("weather_icon", models.CharField(max_length=255)),
+                ("visibility", models.IntegerField()),
+                ("wind_speed", models.DecimalField(decimal_places=2, max_digits=15)),
+                ("wind_deg", models.IntegerField()),
+                ("clouds", models.IntegerField()),
+                ("created", models.DateTimeField()),
             ],
         ),
     ]

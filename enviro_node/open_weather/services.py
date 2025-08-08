@@ -17,10 +17,10 @@ class OpenWeather:
         """Get response from open weather map"""
 
         if self.api_key is None or self.city_name is None:
-            raise NameError('Der API Key oder die Stadt fehlt.')
+            raise NameError("Der API Key oder die Stadt fehlt.")
 
-        base_url: str = 'https://api.openweathermap.org/data/2.5/weather'
-        params: dict = {'q': self.city_name, 'appid': self.api_key, 'units': 'metric'}
+        base_url: str = "https://api.openweathermap.org/data/2.5/weather"
+        params: dict = {"q": self.city_name, "appid": self.api_key, "units": "metric"}
 
         try:
             response = requests.get(base_url, params=params)
@@ -32,23 +32,23 @@ class OpenWeather:
                 return data
 
         except requests.RequestException as exception:
-            logging.error('Fehler bei der Anfrage:', exception)
+            logging.error("Fehler bei der Anfrage:", exception)
 
         return {}
 
     def save_data(self, data: dict) -> None:
         OutdoorWeatherData(
-            temperature=data['main']['temp'],
-            feels_like=data['main']['feels_like'],
-            temp_min=data['main']['temp_min'],
-            temp_max=data['main']['temp_max'],
-            humidity=data['main']['humidity'],
-            pressure=data['main']['pressure'],
-            weather_main=data['weather'][0]['main'],
-            weather_description=data['weather'][0]['description'],
-            weather_icon=data['weather'][0]['icon'],
-            visibility=data['visibility'],
-            wind_speed=data['wind']['speed'],
-            wind_deg=data['wind']['deg'],
-            clouds=data['clouds']['all'],
+            temperature=data["main"]["temp"],
+            feels_like=data["main"]["feels_like"],
+            temp_min=data["main"]["temp_min"],
+            temp_max=data["main"]["temp_max"],
+            humidity=data["main"]["humidity"],
+            pressure=data["main"]["pressure"],
+            weather_main=data["weather"][0]["main"],
+            weather_description=data["weather"][0]["description"],
+            weather_icon=data["weather"][0]["icon"],
+            visibility=data["visibility"],
+            wind_speed=data["wind"]["speed"],
+            wind_deg=data["wind"]["deg"],
+            clouds=data["clouds"]["all"],
         ).save()
