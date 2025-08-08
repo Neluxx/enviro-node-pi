@@ -1,7 +1,4 @@
-try:
-    import bme680  # type: ignore
-except ImportError:
-    bme680 = None
+import bme680  # type: ignore
 
 
 class BME680Sensor:
@@ -18,8 +15,7 @@ class BME680Sensor:
 
     def get_data(self) -> dict:
         return {
-            'temperature': self.sensor.data.temperature,
-            'humidity': self.sensor.data.humidity,
-            'pressure': self.sensor.data.pressure,
+            "temperature": self.sensor.data.temperature,
+            "humidity": self.sensor.data.humidity,
+            "pressure": self.sensor.data.pressure,
         }
-

@@ -1,7 +1,4 @@
-try:
-    import mh_z19  # type: ignore
-except ImportError:
-    mh_z19 = None
+import mh_z19  # type: ignore
 
 
 class MHZ19Sensor:
@@ -10,4 +7,4 @@ class MHZ19Sensor:
         self.sensor = mh_z19.read_all()
 
     def get_data(self) -> dict:
-        return {'co2': self.sensor['co2']}
+        return {"co2": self.sensor["co2"]}
