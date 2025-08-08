@@ -13,6 +13,5 @@ class SensorDataSaver:
                 pressure=data["pressure"],
                 co2=data["co2"],
             ).save()
-        except ValidationErr as e:
-            # logger.error(f"Validation failed: {e}")
+        except ValidationErr:
             pass
