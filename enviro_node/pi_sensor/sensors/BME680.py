@@ -13,7 +13,7 @@ class BME680Sensor:
         self.sensor.set_temperature_oversample(bme680.OS_8X)
         self.sensor.set_filter(bme680.FILTER_SIZE_3)
 
-    def get_data(self) -> dict:
+    def get_data(self) -> dict[str, float]:
         return {
             "temperature": self.sensor.data.temperature,
             "humidity": self.sensor.data.humidity,

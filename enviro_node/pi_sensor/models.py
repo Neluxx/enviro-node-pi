@@ -1,3 +1,4 @@
+from typing import Any
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
@@ -25,7 +26,7 @@ class IndoorSensorData(models.Model):
     )
     created = models.DateTimeField(auto_now_add=True)
 
-    def save(self, *args, **kwargs):
+    def save(self, *args: Any, **kwargs: Any) -> None:
         self.full_clean()
         super().save(*args, **kwargs)
 

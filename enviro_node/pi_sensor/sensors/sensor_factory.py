@@ -3,7 +3,7 @@ from django.conf import settings
 
 
 class SensorProtocol(Protocol):
-    def get_data(self) -> dict: ...
+    def get_data(self) -> dict[str, float]: ...
 
 
 class SensorFactory:

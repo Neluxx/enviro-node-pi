@@ -6,5 +6,5 @@ class MHZ19Sensor:
     def __init__(self) -> None:
         self.sensor = mh_z19.read_all()
 
-    def get_data(self) -> dict:
+    def get_data(self) -> dict[str, float]:
         return {"co2": self.sensor["co2"]}

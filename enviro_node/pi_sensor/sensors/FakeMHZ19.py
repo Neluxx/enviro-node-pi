@@ -3,5 +3,5 @@ import random
 
 class FakeMHZ19Sensor:
 
-    def get_data(self) -> dict:
-        return {"co2": random.randint(400, 800)}
+    def get_data(self) -> dict[str, float]:
+        return {"co2": random.uniform(400, 800)}

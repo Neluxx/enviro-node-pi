@@ -5,7 +5,7 @@ from pi_sensor.models import IndoorSensorData
 
 class SensorDataSaver:
 
-    def save_data(self, data: dict) -> None:
+    def save_data(self, data: dict[str, float]) -> None:
         try:
             IndoorSensorData(
                 temperature=data["temperature"],

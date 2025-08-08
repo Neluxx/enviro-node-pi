@@ -1,6 +1,7 @@
 import requests
 import logging
 
+from typing import Any
 from django.conf import settings
 
 from .models import OutdoorWeatherData
@@ -13,20 +14,24 @@ class OpenWeather:
         self.api_key = settings.API_KEY
         self.city_name = settings.CITY_NAME
 
-    def get_data(self) -> dict:
+    def get_data(self) -> dict[str, Any]:
         """Get response from open weather map"""
 
         if self.api_key is None or self.city_name is None:
             raise NameError("Der API Key oder die Stadt fehlt.")
 
         base_url: str = "https://api.openweathermap.org/data/2.5/weather"
-        params: dict = {"q": self.city_name, "appid": self.api_key, "units": "metric"}
+        params: dict[str, str] = {
+            "q": self.city_name,
+            "appid": self.api_key,
+            "units": "metric",
+        }
 
         try:
             response = requests.get(base_url, params=params)
             response.raise_for_status()
 
-            data: dict = response.json()
+            data: dict[str, Any] = response.json()
 
             if data:
                 return data
@@ -36,7 +41,7 @@ class OpenWeather:
 
         return {}
 
-    def save_data(self, data: dict) -> None:
+    def save_data(self, data: dict[str, Any]) -> None:
         OutdoorWeatherData(
             temperature=data["main"]["temp"],
             feels_like=data["main"]["feels_like"],
