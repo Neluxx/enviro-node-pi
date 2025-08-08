@@ -1,8 +1,6 @@
 -r requirements.txt
 
 # Testing
-pytest~=8.4
-pytest-django~=4.11
 coverage~=7.10
 
 # Code Quality
