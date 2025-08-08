@@ -25,7 +25,7 @@ In future, it should be possible to create diagrams from the data collected in t
 
 ## Usage
 
-- Go into the django project directory `cd raspberrypi-weather-station/weather_station`
+- Go into the django project directory `cd raspberrypi-weather-station/enviro_node`
 - Run the project `python manage.py runserver`
 - Visit [Localhost](http://127.0.0.1:8000/)
 
