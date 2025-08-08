@@ -1,4 +1,3 @@
-import os
 from typing import Protocol
 from django.conf import settings
 
