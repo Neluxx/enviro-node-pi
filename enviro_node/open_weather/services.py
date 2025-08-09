@@ -1,6 +1,6 @@
-import requests
 import logging
 
+import requests
 from django.conf import settings
 
 from .models import OutdoorWeatherData
