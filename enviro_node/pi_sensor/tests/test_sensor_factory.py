@@ -2,8 +2,8 @@ from unittest.mock import patch
 
 from django.test import TestCase
 
-from pi_sensor.sensors.FakeBME680 import FakeBME680Sensor
-from pi_sensor.sensors.FakeMHZ19 import FakeMHZ19Sensor
+from pi_sensor.sensors.fake_bme680 import FakeBME680Sensor
+from pi_sensor.sensors.fake_mh_z19 import FakeMHZ19Sensor
 from pi_sensor.sensors.sensor_factory import SensorFactory
 
 
