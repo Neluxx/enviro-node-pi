@@ -13,5 +13,7 @@ class SensorDataSaver:
                 pressure=data["pressure"],
                 co2=data["co2"],
             ).save()
+        except KeyError:
+            pass
         except ValidationErr:
             pass
