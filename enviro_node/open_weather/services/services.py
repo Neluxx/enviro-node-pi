@@ -3,8 +3,7 @@ import logging
 from django.conf import settings
 
 import requests
-
-from .models import OutdoorWeatherData
+from open_weather.models import OutdoorWeatherData
 
 
 class OpenWeather:
