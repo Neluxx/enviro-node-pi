@@ -40,12 +40,5 @@ class OpenWeatherClient:
 
         return self._make_request("weather", params)
 
-    def validate_api_key(self) -> bool:
-        try:
-            self.get_current_weather("London")
-            return True
-        except requests.RequestException:
-            return False
-
     def get_icon_url(self, icon_code: str, size: str = "2x") -> str:
         return f"https://openweathermap.org/img/wn/{icon_code}@{size}.png"
