@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from open_weather.services import OpenWeatherClient, OpenWeatherDataSaver
+from open_weather.services import OpenWeatherClient, OpenWeatherSaver
 
 
 class Command(BaseCommand):
@@ -9,7 +9,7 @@ class Command(BaseCommand):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.open_weather_client = OpenWeatherClient()
-        self.open_weather_saver = OpenWeatherDataSaver()
+        self.open_weather_saver = OpenWeatherSaver()
 
     def handle(self, *args, **kwargs) -> None:
         open_weather_data = self.open_weather_client.get_current_weather()

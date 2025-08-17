@@ -1,2 +1,2 @@
 from .open_weather_client import OpenWeatherClient
-from .open_weather_data_saver import OpenWeatherDataSaver
+from .open_weather_data_saver import OpenWeatherSaver

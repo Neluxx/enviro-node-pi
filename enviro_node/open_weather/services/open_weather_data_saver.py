@@ -3,7 +3,7 @@ from xml.dom import ValidationErr
 from open_weather.models import OutdoorWeatherData
 
 
-class OpenWeatherDataSaver:
+class OpenWeatherSaver:
 
     def save_data(self, data: dict) -> None:
         try:
