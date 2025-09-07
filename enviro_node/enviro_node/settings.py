@@ -30,6 +30,8 @@ SECRET_KEY = env("SECRET")
 # Set environment variables
 API_KEY = env("API_KEY")
 CITY_NAME = env("CITY_NAME")
+BASE_URL = env("BASE_URL")
+BEARER_TOKEN = env("BEARER_TOKEN")
 MOCK_SENSORS = env.bool("MOCK_SENSORS", default=False)
 
 # SECURITY WARNING: don't run with debug turned on in production!
