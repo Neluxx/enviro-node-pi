@@ -5,26 +5,16 @@ from django.db import models
 
 
 class IndoorSensorData(models.Model):
-    temperature = models.DecimalField(
-        max_digits=15,
-        decimal_places=2,
-        validators=[MinValueValidator(-40), MaxValueValidator(85)],
+    temperature = models.FloatField(
+        validators=[MinValueValidator(-40), MaxValueValidator(85)]
     )
-    humidity = models.DecimalField(
-        max_digits=15,
-        decimal_places=2,
-        validators=[MinValueValidator(0), MaxValueValidator(100)],
+    humidity = models.FloatField(
+        validators=[MinValueValidator(0), MaxValueValidator(100)]
     )
-    pressure = models.DecimalField(
-        max_digits=15,
-        decimal_places=2,
-        validators=[MinValueValidator(300), MaxValueValidator(1100)],
+    pressure = models.FloatField(
+        validators=[MinValueValidator(300), MaxValueValidator(1100)]
     )
-    co2 = models.DecimalField(
-        max_digits=15,
-        decimal_places=2,
-        validators=[MinValueValidator(0), MaxValueValidator(5000)],
-    )
+    co2 = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(5000)])
     created = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args: Any, **kwargs: Any) -> None:

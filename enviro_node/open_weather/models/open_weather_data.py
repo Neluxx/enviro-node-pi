@@ -4,27 +4,18 @@ from django.db import models
 
 
 class OutdoorWeatherData(models.Model):
-    temperature = models.DecimalField(
-        max_digits=15,
-        decimal_places=2,
-        validators=[MinValueValidator(-100), MaxValueValidator(70)],
+    temperature = models.FloatField(
+        validators=[MinValueValidator(-100), MaxValueValidator(70)]
     )
-    feels_like = models.DecimalField(
-        max_digits=15,
-        decimal_places=2,
-        validators=[MinValueValidator(-100), MaxValueValidator(70)],
+    feels_like = models.FloatField(
+        validators=[MinValueValidator(-100), MaxValueValidator(70)]
     )
-    temp_min = models.DecimalField(
-        max_digits=15,
-        decimal_places=2,
-        validators=[MinValueValidator(-100), MaxValueValidator(70)],
+    temp_min = models.FloatField(
+        validators=[MinValueValidator(-100), MaxValueValidator(70)]
     )
-    temp_max = models.DecimalField(
-        max_digits=15,
-        decimal_places=2,
-        validators=[MinValueValidator(-100), MaxValueValidator(70)],
+    temp_max = models.FloatField(
+        validators=[MinValueValidator(-100), MaxValueValidator(70)]
     )
-
     humidity = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(100)]
     )
@@ -39,10 +30,8 @@ class OutdoorWeatherData(models.Model):
     visibility = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(50000)]
     )
-    wind_speed = models.DecimalField(
-        max_digits=15,
-        decimal_places=2,
-        validators=[MinValueValidator(0), MaxValueValidator(200)],
+    wind_speed = models.FloatField(
+        validators=[MinValueValidator(0), MaxValueValidator(200)]
     )
     wind_deg = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(360)]
