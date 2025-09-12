@@ -39,15 +39,16 @@ class OutdoorWeatherData(models.Model):
     clouds = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(100)]
     )
-    created = models.DateTimeField(auto_now_add=True)
+    submitted_at = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ["-created"]
+        ordering = ["-created_at"]
         verbose_name = "OpenWeather-Data"
         verbose_name_plural = "OpenWeather-Data"
 
     def __str__(self) -> str:
-        date_str = self.created.strftime("%d.%m.%Y %H:%M")
+        date_str = self.created_at.strftime("%d.%m.%Y %H:%M")
         return f"{self.weather_main} - {self.temperature}°C ({date_str})"
 
     def clean(self) -> None:

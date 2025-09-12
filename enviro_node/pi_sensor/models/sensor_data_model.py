@@ -15,13 +15,14 @@ class IndoorSensorData(models.Model):
         validators=[MinValueValidator(300), MaxValueValidator(1100)]
     )
     co2 = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(5000)])
-    created = models.DateTimeField(auto_now_add=True)
+    submitted_at = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args: Any, **kwargs: Any) -> None:
         self.full_clean()
         super().save(*args, **kwargs)
 
     class Meta:
-        ordering = ["-created"]
+        ordering = ["-created_at"]
         verbose_name = "Innenraum-Sensordaten"
         verbose_name_plural = "Innenraum-Sensordaten"
