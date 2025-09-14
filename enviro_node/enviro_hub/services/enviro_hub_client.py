@@ -27,7 +27,7 @@ class EnviroHubClient:
         self,
         method: str,
         url: str,
-        data: Optional[Dict[str, Any]] = None,
+        data: Optional[list[Any]] = None,
         params: Optional[Dict[str, Any]] = None,
         timeout: int = 30,
     ) -> requests.Response:
@@ -36,6 +36,8 @@ class EnviroHubClient:
 
         try:
             logger.debug(f"API Request: {method} {url}")
+            logger.debug(f"Request Data: {data}")
+
             response = self.session.request(
                 method=method,
                 url=url,
@@ -46,6 +48,8 @@ class EnviroHubClient:
             )
 
             logger.debug(f"API Response: {response.status_code}")
+            logger.debug(f"Response Body: {response.text}")
+
             response.raise_for_status()
             return response
 
@@ -53,16 +57,14 @@ class EnviroHubClient:
             logger.error(f"API Request failed: {method} {url} - {str(e)}")
             raise
 
-    def post(
-        self, url: str, data: Dict[str, Any], timeout: int = 30
-    ) -> requests.Response:
+    def post(self, url: str, data: list[Any], timeout: int = 30) -> requests.Response:
         return self._make_request("POST", url, data=data, timeout=timeout)
 
 
 enviro_hub_client = EnviroHubClient()
 
 
-def send_data(url: str, data: Dict[str, Any]) -> Union[Dict[str, Any], None]:
+def submit_data(url: str, data: list[Any]) -> Union[Dict[str, Any], None]:
     try:
         response = enviro_hub_client.post(url, data)
         return response.json()
