@@ -88,3 +88,22 @@ class OutdoorWeatherData(models.Model):
                         )
                     }
                 )
+
+    def to_dict(self) -> dict:
+        """Return model data as a dictionary with JSON-serializable datetime strings"""
+        return {
+            "temperature": self.temperature,
+            "feels_like": self.feels_like,
+            "temp_min": self.temp_min,
+            "temp_max": self.temp_max,
+            "humidity": self.humidity,
+            "pressure": self.pressure,
+            "weather_main": self.weather_main,
+            "weather_description": self.weather_description,
+            "weather_icon": self.weather_icon,
+            "visibility": self.visibility,
+            "wind_speed": self.wind_speed,
+            "wind_deg": self.wind_deg,
+            "clouds": self.clouds,
+            "created_at": self.created_at.isoformat(),
+        }
