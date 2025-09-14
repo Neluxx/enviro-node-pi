@@ -32,6 +32,7 @@ API_KEY = env("API_KEY")
 CITY_NAME = env("CITY_NAME")
 BASE_URL = env("BASE_URL")
 BEARER_TOKEN = env("BEARER_TOKEN")
+VERIFY_SSL = env.bool("VERIFY_SSL", default=False)
 MOCK_SENSORS = env.bool("MOCK_SENSORS", default=False)
 
 # SECURITY WARNING: don't run with debug turned on in production!

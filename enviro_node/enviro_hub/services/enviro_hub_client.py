@@ -12,6 +12,7 @@ class EnviroHubClient:
     def __init__(self) -> None:
         self.base_url = settings.BASE_URL
         self.bearer_token = settings.BEARER_TOKEN
+        self.verify_ssl = settings.VERIFY_SSL
         self.session = requests.Session()
 
         self.session.headers.update(
@@ -36,7 +37,12 @@ class EnviroHubClient:
         try:
             logger.debug(f"API Request: {method} {url}")
             response = self.session.request(
-                method=method, url=url, json=data, params=params, timeout=timeout
+                method=method,
+                url=url,
+                json=data,
+                params=params,
+                timeout=timeout,
+                verify=self.verify_ssl,
             )
 
             logger.debug(f"API Response: {response.status_code}")
