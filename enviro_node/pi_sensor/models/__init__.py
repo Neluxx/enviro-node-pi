@@ -1,1 +1,1 @@
-from .sensor_data_model import IndoorSensorData
+from .indoor_sensor_data import IndoorSensorData
