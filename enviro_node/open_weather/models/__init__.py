@@ -1,1 +1,1 @@
-from .open_weather_data import OutdoorWeatherData
+from .outdoor_weather_data import OutdoorWeatherData
