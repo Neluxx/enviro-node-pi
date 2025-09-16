@@ -22,11 +22,6 @@ class IndoorSensorData(models.Model):
         self.full_clean()
         super().save(*args, **kwargs)
 
-    class Meta:
-        ordering = ["-created_at"]
-        verbose_name = "Innenraum-Sensordaten"
-        verbose_name_plural = "Innenraum-Sensordaten"
-
     def to_dict(self) -> dict:
         """Return model data as a dictionary with JSON-serializable datetime strings"""
         return {
