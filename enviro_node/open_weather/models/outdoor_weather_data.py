@@ -1,4 +1,5 @@
-from django.core.exceptions import ValidationError
+from typing import Any
+
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
@@ -42,52 +43,9 @@ class OutdoorWeatherData(models.Model):
     submitted_at = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        ordering = ["-created_at"]
-        verbose_name = "OpenWeather-Data"
-        verbose_name_plural = "OpenWeather-Data"
-
-    def __str__(self) -> str:
-        date_str = self.created_at.strftime("%d.%m.%Y %H:%M")
-        return f"{self.weather_main} - {self.temperature}°C ({date_str})"
-
-    def clean(self) -> None:
-        super().clean()
-
-        if self.temp_min is not None and self.temp_max is not None:
-            if self.temp_min > self.temp_max:
-                raise ValidationError(
-                    {
-                        "temp_min": (
-                            "The minimum temperature cannot be "
-                            "higher than the maximum temperature."
-                        ),
-                        "temp_max": (
-                            "The maximum temperature cannot be "
-                            "lower than the minimum temperature."
-                        ),
-                    }
-                )
-
-        if self.temperature is not None:
-            if self.temp_min is not None and self.temperature < self.temp_min:
-                raise ValidationError(
-                    {
-                        "temperature": (
-                            "The current temperature cannot be "
-                            "lower than the minimum temperature."
-                        )
-                    }
-                )
-            if self.temp_max is not None and self.temperature > self.temp_max:
-                raise ValidationError(
-                    {
-                        "temperature": (
-                            "The current temperature cannot be "
-                            "higher than the maximum temperature."
-                        )
-                    }
-                )
+    def save(self, *args: Any, **kwargs: Any) -> None:
+        self.full_clean()
+        super().save(*args, **kwargs)
 
     def to_dict(self) -> dict:
         """Return model data as a dictionary with JSON-serializable datetime strings"""
