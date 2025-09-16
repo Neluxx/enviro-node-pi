@@ -26,3 +26,13 @@ class IndoorSensorData(models.Model):
         ordering = ["-created_at"]
         verbose_name = "Innenraum-Sensordaten"
         verbose_name_plural = "Innenraum-Sensordaten"
+
+    def to_dict(self) -> dict:
+        """Return model data as a dictionary with JSON-serializable datetime strings"""
+        return {
+            "temperature": self.temperature,
+            "humidity": self.humidity,
+            "pressure": self.pressure,
+            "co2": self.co2,
+            "created_at": self.created_at.isoformat(),
+        }
