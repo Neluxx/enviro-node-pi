@@ -3,7 +3,7 @@ from xml.dom import ValidationErr
 from pi_sensor.models import IndoorSensorData
 
 
-class SensorDataRepository:
+class SensorRepository:
 
     def insert(self, data: dict[str, float]) -> None:
         try:
