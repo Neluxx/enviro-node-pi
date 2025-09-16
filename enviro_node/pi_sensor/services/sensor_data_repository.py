@@ -3,9 +3,9 @@ from xml.dom import ValidationErr
 from pi_sensor.models import IndoorSensorData
 
 
-class SensorDataSaver:
+class SensorDataRepository:
 
-    def save_data(self, data: dict[str, float]) -> None:
+    def insert(self, data: dict[str, float]) -> None:
         try:
             IndoorSensorData(
                 temperature=data["temperature"],

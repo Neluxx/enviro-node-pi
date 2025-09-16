@@ -1,2 +1,2 @@
 from .sensor_data_reader import SensorDataReader
-from .sensor_data_saver import SensorDataSaver
+from .sensor_data_repository import SensorDataRepository
