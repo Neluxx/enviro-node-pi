@@ -3,18 +3,18 @@ from typing import Any
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
+TEMPERATURE_VALIDATORS = [MinValueValidator(-100), MaxValueValidator(100)]
+PERCENTAGE_VALIDATORS = [MinValueValidator(0), MaxValueValidator(100)]  # In percentage
+PRESSURE_VALIDATORS = [MinValueValidator(900), MaxValueValidator(1100)]  # In hPa
+CO2_VALIDATORS = [MinValueValidator(900), MaxValueValidator(1100)]  # In ppm
+
 
 class IndoorSensorData(models.Model):
-    temperature = models.FloatField(
-        validators=[MinValueValidator(-40), MaxValueValidator(85)]
-    )
-    humidity = models.FloatField(
-        validators=[MinValueValidator(0), MaxValueValidator(100)]
-    )
-    pressure = models.FloatField(
-        validators=[MinValueValidator(300), MaxValueValidator(1100)]
-    )
-    co2 = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(5000)])
+    temperature = models.FloatField(validators=TEMPERATURE_VALIDATORS)
+    humidity = models.FloatField(validators=PERCENTAGE_VALIDATORS)
+    pressure = models.FloatField(validators=PRESSURE_VALIDATORS)
+    co2 = models.FloatField(validators=CO2_VALIDATORS)
+
     submitted_at = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
