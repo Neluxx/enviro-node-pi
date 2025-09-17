@@ -5,7 +5,7 @@ from pi_sensor.services import SensorRepository
 
 
 class Command(BaseCommand):
-    help = "Get open weather data"
+    help = "Submit sensor data to the enviro hub"
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)

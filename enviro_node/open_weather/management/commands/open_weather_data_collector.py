@@ -4,7 +4,7 @@ from open_weather.services import OpenWeatherClient, OpenWeatherRepository
 
 
 class Command(BaseCommand):
-    help = "Get open weather data"
+    help = "Fetch outdoor weather data over the open weather API"
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)

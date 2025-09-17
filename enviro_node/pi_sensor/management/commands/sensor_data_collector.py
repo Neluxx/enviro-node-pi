@@ -4,7 +4,7 @@ from pi_sensor.services import SensorReader, SensorRepository
 
 
 class Command(BaseCommand):
-    help = "Get pi_sensor data"
+    help = "Collect sensor data from sensors on the raspberry pi"
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)

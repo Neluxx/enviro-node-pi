@@ -5,7 +5,7 @@ from open_weather.services import OpenWeatherRepository
 
 
 class Command(BaseCommand):
-    help = "Get open weather data"
+    help = "Submit open weather data to the enviro hub"
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
