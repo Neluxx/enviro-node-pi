@@ -1,9 +1,12 @@
-from xml.dom import ValidationErr
+import logging
 
+from django.core.exceptions import ValidationError
 from django.db.models import QuerySet
 from django.utils import timezone
 
 from open_weather.models import OutdoorWeatherData
+
+logger = logging.getLogger(__name__)
 
 
 class OpenWeatherRepository:
@@ -33,7 +36,7 @@ class OpenWeatherRepository:
                 wind_deg=data["wind"]["deg"],
                 clouds=data["clouds"]["all"],
             ).save()
-        except KeyError:
-            pass
-        except ValidationErr:
-            pass
+        except KeyError as e:
+            logger.warning(f"Missing required sensor field: {e}")
+        except ValidationError as e:
+            logger.error(f"Sensor data validation failed: {e}")
