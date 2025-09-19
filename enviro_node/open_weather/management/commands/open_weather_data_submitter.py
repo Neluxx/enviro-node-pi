@@ -1,18 +1,44 @@
+import logging
+
 from django.core.management.base import BaseCommand
 
-from enviro_hub.services.enviro_hub_client import submit_data
+from enviro_hub.services import EnviroHubClient
 from open_weather.services import OpenWeatherRepository
+
+logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
-    help = "Get open weather data"
-
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
-        self.repository = OpenWeatherRepository()
+    help = "Submit open weather data to enviro hub"
 
     def handle(self, *args, **kwargs) -> None:
-        queryset = self.repository.find_unsubmitted_data()
-        open_weather_data = [obj.to_dict() for obj in queryset]
-        submit_data("/open-weather-data", open_weather_data)
-        self.repository.mark_as_submitted(queryset)
+        logger.info("Starting open weather data submission")
+
+        try:
+            enviro_hub_client = EnviroHubClient()
+            repository = OpenWeatherRepository()
+
+            logger.info("Find unsubmitted open weather data...")
+            queryset = repository.find_unsubmitted_data()
+            if not queryset.exists():
+                logger.info("No unsubmitted open weather data found")
+                return
+
+            logger.info(f"Found {queryset.count()} unsubmitted record(s)")
+            open_weather_data = [obj.to_dict() for obj in queryset]
+            logger.info(f"Unsubmitted open weather data: {open_weather_data}")
+
+            logger.info("Submit open weather data to enviro hub...")
+            enviro_hub_client.submit_data("/open-weather-data", open_weather_data)
+            logger.info("Open weather data successfully submitted")
+
+            logger.info("Mark open weather data as submitted...")
+            updated_count = repository.mark_as_submitted(queryset)
+            logger.info(f"Marked {updated_count} record(s) as submitted")
+
+        except Exception as e:
+            logger.error(f"Error during open weather data submission: {e}")
+            raise
+
+        finally:
+            logger.info("Finished open weather data submission")
