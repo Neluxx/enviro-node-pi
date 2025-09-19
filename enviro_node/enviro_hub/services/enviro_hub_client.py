@@ -60,17 +60,13 @@ class EnviroHubClient:
     def post(self, url: str, data: list[Any], timeout: int = 30) -> requests.Response:
         return self._make_request("POST", url, data=data, timeout=timeout)
 
-
-enviro_hub_client = EnviroHubClient()
-
-
-def submit_data(url: str, data: list[Any]) -> Union[Dict[str, Any], None]:
-    try:
-        response = enviro_hub_client.post(url, data)
-        return response.json()
-    except requests.exceptions.RequestException as e:
-        logger.error(f"Failed to send data to {url}: {str(e)}")
-        return None
-    except ValueError as e:
-        logger.error(f"Failed to parse JSON response from {url}: {str(e)}")
-        return None
+    def submit_data(self, url: str, data: list[Any]) -> Union[Dict[str, Any], None]:
+        try:
+            response = self.post(url, data)
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Failed to send data to {url}: {str(e)}")
+            return None
+        except ValueError as e:
+            logger.error(f"Failed to parse JSON response from {url}: {str(e)}")
+            return None
