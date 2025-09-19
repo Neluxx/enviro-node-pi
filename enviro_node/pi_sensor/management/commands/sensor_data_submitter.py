@@ -30,7 +30,7 @@ class Command(BaseCommand):
 
             logger.info("Submit sensor data to enviro hub...")
             enviro_hub_client.submit_data("/environmental-data", sensor_data)
-            logger.info("Sensor data submission completed successfully")
+            logger.info("Sensor data successfully submitted")
 
             logger.info("Mark sensor data as submitted...")
             updated_count = repository.mark_as_submitted(queryset)

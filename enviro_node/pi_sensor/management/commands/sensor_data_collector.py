@@ -23,11 +23,10 @@ class Command(BaseCommand):
 
             logger.info("Storing sensor data to database...")
             repository.insert(sensor_data)
-            logger.info("Sensor data collection completed successfully")
 
         except Exception as e:
             logger.error(f"Error during sensor data collection: {e}")
             raise
 
         finally:
-            logger.info("Finished sensor data collection")
+            logger.info("Sensor data collection completed successfully")
