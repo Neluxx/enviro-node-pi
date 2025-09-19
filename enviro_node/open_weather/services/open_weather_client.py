@@ -7,13 +7,21 @@ import requests
 
 
 class OpenWeatherClient:
+    BASE_URL = "https://api.openweathermap.org/data/2.5"
+    ICON_BASE_URL = "https://openweathermap.org/img/wn"
+    DEFAULT_TIMEOUT = 30
+    DEFAULT_UNITS = "metric"
+    DEFAULT_LANG = "de"
+    DEFAULT_ICON_SIZE = "2x"
 
     def __init__(self) -> None:
         self.api_key = settings.API_KEY
         self.city_name = settings.CITY_NAME
-        self.base_url = "https://api.openweathermap.org/data/2.5"
-        self.timeout = 30
+        self.base_url = self.BASE_URL
+        self.timeout = self.DEFAULT_TIMEOUT
+        self._validate_configuration()
 
+    def _validate_configuration(self) -> None:
         if not self.api_key:
             raise ValueError("API_KEY must be set in settings.py")
 
@@ -30,7 +38,7 @@ class OpenWeatherClient:
             raise
 
     def get_current_weather(
-        self, city: Optional[str] = None, units: str = "metric", lang: str = "de"
+        self, city: Optional[str] = None, units: str = DEFAULT_UNITS, lang: str = DEFAULT_LANG
     ) -> Dict:
         city = city or self.city_name
         if not city:
@@ -40,5 +48,5 @@ class OpenWeatherClient:
 
         return self._make_request("weather", params)
 
-    def get_icon_url(self, icon_code: str, size: str = "2x") -> str:
-        return f"https://openweathermap.org/img/wn/{icon_code}@{size}.png"
+    def get_icon_url(self, icon_code: str, size: str = DEFAULT_ICON_SIZE) -> str:
+        return f"{self.ICON_BASE_URL}/{icon_code}@{size}.png"
