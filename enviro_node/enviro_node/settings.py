@@ -136,3 +136,57 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {asctime} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'error_logger': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'error.log',
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'root': {
+        'handlers': ['console', 'error_logger'],
+        'level': 'INFO',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'error_logger'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'pi_sensor': {
+            'handlers': ['console', 'error_logger'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'enviro_hub': {
+            'handlers': ['console', 'error_logger'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'open_weather': {
+            'handlers': ['console', 'error_logger'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
