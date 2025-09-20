@@ -1,5 +1,6 @@
 import logging
 from typing import Any, Dict, Optional, Union
+
 from django.conf import settings
 
 import requests
@@ -21,11 +22,13 @@ class EnviroHubClient:
     def _create_configured_session(self) -> requests.Session:
         """Create and configure a request session with authentication headers."""
         session = requests.Session()
-        session.headers.update({
-            "Authorization": f"Bearer {self.bearer_token}",
-            "Content-Type": self.CONTENT_TYPE_JSON,
-            "Accept": self.CONTENT_TYPE_JSON,
-        })
+        session.headers.update(
+            {
+                "Authorization": f"Bearer {self.bearer_token}",
+                "Content-Type": self.CONTENT_TYPE_JSON,
+                "Accept": self.CONTENT_TYPE_JSON,
+            }
+        )
         return session
 
     def _normalize_url(self, url: str) -> str:
@@ -35,12 +38,12 @@ class EnviroHubClient:
         return url
 
     def _make_request(
-            self,
-            method: str,
-            url: str,
-            json_data: Optional[Union[list[Any], Dict[str, Any]]] = None,
-            params: Optional[Dict[str, Any]] = None,
-            timeout: int = DEFAULT_TIMEOUT,
+        self,
+        method: str,
+        url: str,
+        json_data: Optional[Union[list[Any], Dict[str, Any]]] = None,
+        params: Optional[Dict[str, Any]] = None,
+        timeout: int = DEFAULT_TIMEOUT,
     ) -> requests.Response:
         normalized_url = self._normalize_url(url)
 
@@ -67,7 +70,9 @@ class EnviroHubClient:
             logger.error(f"API Request failed: {method} {normalized_url} - {str(e)}")
             raise
 
-    def post(self, url: str, data: list[Any], timeout: int = DEFAULT_TIMEOUT) -> requests.Response:
+    def post(
+        self, url: str, data: list[Any], timeout: int = DEFAULT_TIMEOUT
+    ) -> requests.Response:
         return self._make_request(self.HTTP_POST, url, json_data=data, timeout=timeout)
 
     def submit_data(self, url: str, data: list[Any]) -> Dict[str, Any]:

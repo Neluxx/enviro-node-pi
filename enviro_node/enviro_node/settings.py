@@ -138,55 +138,55 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
+            "style": "{",
         },
-        'simple': {
-            'format': '{levelname} {asctime} {message}',
-            'style': '{',
-        },
-    },
-    'handlers': {
-        'error_logger': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'error.log',
-            'formatter': 'verbose',
-        },
-        'console': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple',
+        "simple": {
+            "format": "{levelname} {asctime} {message}",
+            "style": "{",
         },
     },
-    'root': {
-        'handlers': ['console', 'error_logger'],
-        'level': 'INFO',
+    "handlers": {
+        "error_logger": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": BASE_DIR / "error.log",
+            "formatter": "verbose",
+        },
+        "console": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
+        },
     },
-    'loggers': {
-        'django': {
-            'handlers': ['console', 'error_logger'],
-            'level': 'INFO',
-            'propagate': False,
+    "root": {
+        "handlers": ["console", "error_logger"],
+        "level": "INFO",
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console", "error_logger"],
+            "level": "INFO",
+            "propagate": False,
         },
-        'pi_sensor': {
-            'handlers': ['console', 'error_logger'],
-            'level': 'INFO',
-            'propagate': False,
+        "pi_sensor": {
+            "handlers": ["console", "error_logger"],
+            "level": "INFO",
+            "propagate": False,
         },
-        'enviro_hub': {
-            'handlers': ['console', 'error_logger'],
-            'level': 'INFO',
-            'propagate': False,
+        "enviro_hub": {
+            "handlers": ["console", "error_logger"],
+            "level": "INFO",
+            "propagate": False,
         },
-        'open_weather': {
-            'handlers': ['console', 'error_logger'],
-            'level': 'INFO',
-            'propagate': False,
+        "open_weather": {
+            "handlers": ["console", "error_logger"],
+            "level": "INFO",
+            "propagate": False,
         },
     },
 }

@@ -38,7 +38,10 @@ class OpenWeatherClient:
             raise
 
     def get_current_weather(
-        self, city: Optional[str] = None, units: str = DEFAULT_UNITS, lang: str = DEFAULT_LANG
+        self,
+        city: Optional[str] = None,
+        units: str = DEFAULT_UNITS,
+        lang: str = DEFAULT_LANG,
     ) -> Dict:
         city = city or self.city_name
         if not city:
