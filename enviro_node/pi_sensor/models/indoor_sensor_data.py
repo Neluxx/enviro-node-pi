@@ -6,7 +6,7 @@ from django.db import models
 TEMPERATURE_VALIDATORS = [MinValueValidator(-100), MaxValueValidator(100)]
 PERCENTAGE_VALIDATORS = [MinValueValidator(0), MaxValueValidator(100)]  # In percentage
 PRESSURE_VALIDATORS = [MinValueValidator(900), MaxValueValidator(1100)]  # In hPa
-CO2_VALIDATORS = [MinValueValidator(900), MaxValueValidator(1100)]  # In ppm
+CO2_VALIDATORS = [MinValueValidator(300), MaxValueValidator(5000)]  # In ppm
 
 
 class IndoorSensorData(models.Model):
