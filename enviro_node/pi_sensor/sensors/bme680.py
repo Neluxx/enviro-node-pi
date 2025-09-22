@@ -8,7 +8,11 @@ logger = logging.getLogger(__name__)
 
 
 class BME680Sensor(BaseSensor):
-    """BME680 Environmental Sensor"""
+    """BME680 Environmental Sensor
+
+    For setup and further instructions, see:
+    https://learn.pimoroni.com/article/getting-started-with-bme680-breakout
+    """
 
     def __init__(self) -> None:
         """Initialize and configure the BME680 sensor"""
