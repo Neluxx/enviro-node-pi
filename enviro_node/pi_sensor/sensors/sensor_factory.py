@@ -43,16 +43,6 @@ class SensorFactory:
         return sensor_class()
 
     @classmethod
-    def create_bme680_sensor(cls) -> SensorProtocol:
-        """Backward compatibility method"""
-        return cls.create_sensor(SensorType.BME680)
-
-    @classmethod
-    def create_mhz19_sensor(cls) -> SensorProtocol:
-        """Backward compatibility method"""
-        return cls.create_sensor(SensorType.MHZ19)
-
-    @classmethod
     def register_sensor(
         cls,
         sensor_type: SensorType,
