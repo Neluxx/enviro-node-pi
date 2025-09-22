@@ -41,16 +41,3 @@ class SensorFactory:
         sensor_class = getattr(module, class_name)
 
         return sensor_class()
-
-    @classmethod
-    def register_sensor(
-        cls,
-        sensor_type: SensorType,
-        real_class: tuple[str, str],
-        fake_class: tuple[str, str],
-    ) -> None:
-        """Register a new sensor type"""
-        cls._sensor_registry[sensor_type] = {
-            "real": real_class,
-            "fake": fake_class,
-        }
