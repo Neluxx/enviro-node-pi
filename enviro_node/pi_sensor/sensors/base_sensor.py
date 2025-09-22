@@ -8,7 +8,3 @@ class BaseSensor(ABC):
     def get_data(self) -> dict[str, float]:
         """Get sensor data"""
         pass
-
-    def __enter__(self) -> "BaseSensor":
-        """Context manager entry"""
-        return self
