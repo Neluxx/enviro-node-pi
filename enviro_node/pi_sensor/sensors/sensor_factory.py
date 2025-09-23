@@ -37,7 +37,10 @@ class SensorFactory:
         """Create a sensor instance based on type and settings"""
         if sensor_type not in cls._sensor_registry:
             available_types = ", ".join(t.value for t in cls._sensor_registry.keys())
-            raise ValueError(f"Unknown sensor type: {sensor_type.value}. Available types: {available_types}")
+            raise ValueError(
+                f"Unknown sensor type: {sensor_type.value}. "
+                f"Available types: {available_types}"
+            )
 
         sensor_classes = cls._sensor_registry[sensor_type]
         variant = "fake" if settings.MOCK_SENSORS else "real"

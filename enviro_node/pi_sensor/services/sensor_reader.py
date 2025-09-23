@@ -1,5 +1,5 @@
 import logging
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 from pi_sensor.sensors.sensor_factory import SensorFactory, SensorProtocol, SensorType
 
