@@ -14,15 +14,12 @@ class Command(BaseCommand):
         logger.info("Starting sensor data collection")
 
         try:
-            sensor_reader = SensorReader()
-            repository = SensorRepository()
-
             logger.info("Collecting sensor data...")
-            sensor_data = sensor_reader.collect_data()
+            sensor_data = SensorReader().collect_data()
             logger.info(f"Collected sensor data: {sensor_data}")
 
             logger.info("Storing sensor data to database...")
-            repository.insert(sensor_data)
+            SensorRepository().insert(sensor_data)
 
         except Exception as e:
             logger.error(f"Error during sensor data collection: {e}")
