@@ -15,11 +15,8 @@ class Command(BaseCommand):
         logger.info("Starting open weather data submission")
 
         try:
-            enviro_hub_client = EnviroHubClient()
-            repository = OpenWeatherRepository()
-
             logger.info("Find unsubmitted open weather data...")
-            queryset = repository.find_unsubmitted_data()
+            queryset = OpenWeatherRepository().find_unsubmitted_data()
             if not queryset.exists():
                 logger.info("No unsubmitted open weather data found")
                 return
@@ -29,11 +26,11 @@ class Command(BaseCommand):
             logger.info(f"Unsubmitted open weather data: {open_weather_data}")
 
             logger.info("Submit open weather data to enviro hub...")
-            enviro_hub_client.submit_data("/open-weather-data", open_weather_data)
+            EnviroHubClient().submit_data("/open-weather-data", open_weather_data)
             logger.info("Open weather data successfully submitted")
 
             logger.info("Mark open weather data as submitted...")
-            updated_count = repository.mark_as_submitted(queryset)
+            updated_count = OpenWeatherRepository().mark_as_submitted(queryset)
             logger.info(f"Marked {updated_count} record(s) as submitted")
 
         except Exception as e:

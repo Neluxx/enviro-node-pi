@@ -15,11 +15,8 @@ class Command(BaseCommand):
         logger.info("Starting sensor data submission")
 
         try:
-            enviro_hub_client = EnviroHubClient()
-            repository = SensorRepository()
-
             logger.info("Find unsubmitted sensor data...")
-            queryset = repository.find_unsubmitted_data()
+            queryset = SensorRepository().find_unsubmitted_data()
             if not queryset.exists():
                 logger.info("No unsubmitted sensor data found")
                 return
@@ -29,11 +26,11 @@ class Command(BaseCommand):
             logger.info(f"Unsubmitted sensor data: {sensor_data}")
 
             logger.info("Submit sensor data to enviro hub...")
-            enviro_hub_client.submit_data("/environmental-data", sensor_data)
+            EnviroHubClient().submit_data("/environmental-data", sensor_data)
             logger.info("Sensor data successfully submitted")
 
             logger.info("Mark sensor data as submitted...")
-            updated_count = repository.mark_as_submitted(queryset)
+            updated_count = SensorRepository().mark_as_submitted(queryset)
             logger.info(f"Marked {updated_count} record(s) as submitted")
 
         except Exception as e:

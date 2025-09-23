@@ -14,15 +14,12 @@ class Command(BaseCommand):
         logger.info("Starting open weather data retrieving")
 
         try:
-            open_weather_client = OpenWeatherClient()
-            repository = OpenWeatherRepository()
-
             logger.info("Retrieve current open weather data...")
-            open_weather_data = open_weather_client.get_current_weather()
+            open_weather_data = OpenWeatherClient().get_current_weather()
             logger.info(f"Retrieved current open weather data: {open_weather_data}")
 
             logger.info("Storing open weather data to database...")
-            repository.insert(open_weather_data)
+            OpenWeatherRepository().insert(open_weather_data)
 
         except Exception as e:
             logger.error(f"Error during open weather data retrieving: {e}")
