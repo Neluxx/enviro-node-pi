@@ -1,5 +1,5 @@
 import logging
-from typing import Dict, List
+from typing import Dict
 
 from pi_sensor.sensors.sensor_factory import SensorFactory, SensorProtocol, SensorType
 
@@ -29,27 +29,12 @@ class SensorReader:
             raise RuntimeError("No sensors available")
 
         combined_data = {}
-        successful_reads = 0
-
         for sensor_type, sensor in self.sensors.items():
             try:
                 sensor_data = sensor.get_data()
                 combined_data.update(sensor_data)
-                successful_reads += 1
-                logger.debug(
-                    f"Successfully read data from {sensor_type.value}: {sensor_data}"
-                )
+                logger.debug(f"Read data from {sensor_type.value}: {sensor_data}")
             except Exception as e:
                 logger.error(f"Failed to read data from {sensor_type.value}: {e}")
 
-        if successful_reads == 0:
-            raise RuntimeError("Failed to read data from any sensor")
-
-        logger.info(
-            f"Collected data from {successful_reads}/{len(self.sensors)} sensors"
-        )
         return combined_data
-
-    def get_available_sensors(self) -> List[SensorType]:
-        """Get list of successfully initialized sensors"""
-        return list(self.sensors.keys())
