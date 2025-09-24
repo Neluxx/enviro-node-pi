@@ -19,7 +19,7 @@ class OpenWeatherClient(BaseHttpClient):
             "q": self.city_name,
             "appid": self.api_key,
             "units": "metric",
-            "lang": "de"
+            "lang": "de",
         }
         response = self._make_http_request("GET", url, params=params)
 

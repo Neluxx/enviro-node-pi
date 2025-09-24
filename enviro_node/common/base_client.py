@@ -17,14 +17,14 @@ class BaseHttpClient(ABC):
         self.session = requests.Session()
 
     def _make_http_request(
-            self,
-            method: str,
-            url: str,
-            params: Optional[Dict[str, Any]] = None,
-            json_data: Optional[Union[list[Any], Dict[str, Any]]] = None,
-            headers: Optional[Dict[str, str]] = None,
-            timeout: Optional[int] = None,
-            **kwargs: Any
+        self,
+        method: str,
+        url: str,
+        params: Optional[Dict[str, Any]] = None,
+        json_data: Optional[Union[list[Any], Dict[str, Any]]] = None,
+        headers: Optional[Dict[str, str]] = None,
+        timeout: Optional[int] = None,
+        **kwargs: Any,
     ) -> requests.Response:
         """Make an HTTP request with error handling and logging."""
         try:
@@ -39,7 +39,7 @@ class BaseHttpClient(ABC):
                 json=json_data,
                 headers=headers,
                 timeout=timeout or self.timeout,
-                **kwargs
+                **kwargs,
             )
 
             logger.info(f"HTTP Response: {response.status_code}")
