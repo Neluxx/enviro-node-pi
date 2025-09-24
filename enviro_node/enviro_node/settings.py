@@ -44,6 +44,7 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 # Application definition
 
 INSTALLED_APPS = [
+    "common",
     "pi_sensor",
     "enviro_hub",
     "open_weather",
