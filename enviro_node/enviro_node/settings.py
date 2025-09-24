@@ -174,6 +174,11 @@ LOGGING = {
             "level": "INFO",
             "propagate": False,
         },
+        "common": {
+            "handlers": ["console", "error_logger"],
+            "level": "INFO",
+            "propagate": False,
+        },
         "pi_sensor": {
             "handlers": ["console", "error_logger"],
             "level": "INFO",
