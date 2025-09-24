@@ -154,9 +154,11 @@ LOGGING = {
     "handlers": {
         "error_logger": {
             "level": "ERROR",
-            "class": "logging.FileHandler",
+            "class": "logging.handlers.RotatingFileHandler",
             "filename": BASE_DIR / "error.log",
             "formatter": "verbose",
+            "maxBytes": 1024 * 1024 * 5,  # 5 MB
+            "backupCount": 5,
         },
         "console": {
             "level": "INFO",
