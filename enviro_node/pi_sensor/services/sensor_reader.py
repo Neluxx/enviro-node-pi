@@ -33,7 +33,7 @@ class SensorReader:
             try:
                 sensor_data = sensor.get_data()
                 combined_data.update(sensor_data)
-                logger.debug(f"Read data from {sensor_type.value}: {sensor_data}")
+                logger.info(f"Read data from {sensor_type.value}: {sensor_data}")
             except Exception as e:
                 logger.error(f"Failed to read data from {sensor_type.value}: {e}")
 
