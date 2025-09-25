@@ -1,7 +1,6 @@
 import logging
 
 import mh_z19  # type: ignore
-
 from weather_station.sensors import BaseSensor
 
 logger = logging.getLogger(__name__)

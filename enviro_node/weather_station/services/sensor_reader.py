@@ -1,7 +1,7 @@
 import logging
 from typing import Dict
 
-from weather_station.sensors.sensor_factory import (
+from weather_station.services.sensor_factory import (
     SensorFactory,
     SensorProtocol,
     SensorType,
