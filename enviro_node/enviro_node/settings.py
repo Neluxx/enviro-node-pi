@@ -46,7 +46,6 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 INSTALLED_APPS = [
     "common",
     "pi_sensor",
-    "enviro_hub",
     "open_weather",
     "django.contrib.admin",
     "django.contrib.auth",
