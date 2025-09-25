@@ -1,2 +1,0 @@
-from .open_weather_client import OpenWeatherClient
-from .open_weather_repository import OpenWeatherRepository

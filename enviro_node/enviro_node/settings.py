@@ -44,9 +44,7 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 # Application definition
 
 INSTALLED_APPS = [
-    "common",
-    "pi_sensor",
-    "open_weather",
+    "weather_station",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -175,17 +173,7 @@ LOGGING = {
             "level": "INFO",
             "propagate": False,
         },
-        "common": {
-            "handlers": ["console", "error_logger"],
-            "level": "INFO",
-            "propagate": False,
-        },
-        "pi_sensor": {
-            "handlers": ["console", "error_logger"],
-            "level": "INFO",
-            "propagate": False,
-        },
-        "open_weather": {
+        "weather_station": {
             "handlers": ["console", "error_logger"],
             "level": "INFO",
             "propagate": False,
