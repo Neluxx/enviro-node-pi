@@ -185,11 +185,6 @@ LOGGING = {
             "level": "INFO",
             "propagate": False,
         },
-        "enviro_hub": {
-            "handlers": ["console", "error_logger"],
-            "level": "INFO",
-            "propagate": False,
-        },
         "open_weather": {
             "handlers": ["console", "error_logger"],
             "level": "INFO",
