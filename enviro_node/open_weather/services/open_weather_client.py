@@ -2,7 +2,7 @@ from typing import Dict
 
 from django.conf import settings
 
-from common.base_client import BaseHttpClient
+from common.services import BaseHttpClient
 
 
 class OpenWeatherClient(BaseHttpClient):

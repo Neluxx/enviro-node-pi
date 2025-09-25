@@ -2,7 +2,7 @@ import logging
 
 from django.core.management.base import BaseCommand
 
-from enviro_hub.services import EnviroHubClient
+from common.services import EnviroHubClient
 from pi_sensor.services import SensorRepository
 
 logger = logging.getLogger(__name__)
