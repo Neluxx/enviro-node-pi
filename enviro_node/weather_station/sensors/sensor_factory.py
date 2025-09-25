@@ -3,10 +3,10 @@ from typing import Protocol, Type
 
 from django.conf import settings
 
-from weather_station.sensors.bme680 import BME680Sensor
-from weather_station.sensors.fake_bme680 import FakeBME680Sensor
-from weather_station.sensors.fake_mh_z19 import FakeMHZ19Sensor
-from weather_station.sensors.mh_z19 import MHZ19Sensor
+from weather_station.sensors import BME680Sensor
+from weather_station.sensors import FakeBME680Sensor
+from weather_station.sensors import FakeMHZ19Sensor
+from weather_station.sensors import MHZ19Sensor
 
 
 class SensorProtocol(Protocol):

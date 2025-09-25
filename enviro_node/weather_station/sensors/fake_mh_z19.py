@@ -1,7 +1,7 @@
 import logging
 import random
 
-from .base_sensor import BaseSensor
+from weather_station.sensors import BaseSensor
 
 logger = logging.getLogger(__name__)
 
