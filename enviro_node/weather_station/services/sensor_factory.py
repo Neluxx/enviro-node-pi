@@ -1,14 +1,7 @@
 from enum import Enum
-from typing import Protocol, Type
+from typing import Protocol
 
 from django.conf import settings
-
-from weather_station.sensors import (
-    BME680Sensor,
-    FakeBME680Sensor,
-    FakeMHZ19Sensor,
-    MHZ19Sensor,
-)
 
 
 class SensorProtocol(Protocol):
@@ -23,14 +16,14 @@ class SensorType(Enum):
 class SensorFactory:
     """Factory for creating sensor instances with better extensibility"""
 
-    _sensor_registry: dict[SensorType, dict[str, Type[SensorProtocol]]] = {
+    _sensor_registry: dict[SensorType, dict[str, tuple[str, str]]] = {
         SensorType.BME680: {
-            "real": BME680Sensor,
-            "fake": FakeBME680Sensor,
+            "real": ("pi_sensor.sensors.bme680", "BME680Sensor"),
+            "fake": ("pi_sensor.sensors.fake_bme680", "FakeBME680Sensor"),
         },
         SensorType.MHZ19: {
-            "real": MHZ19Sensor,
-            "fake": FakeMHZ19Sensor,
+            "real": ("pi_sensor.sensors.mh_z19", "MHZ19Sensor"),
+            "fake": ("pi_sensor.sensors.fake_mh_z19", "FakeMHZ19Sensor"),
         },
     }
 
@@ -44,8 +37,11 @@ class SensorFactory:
                 f"Available types: {available_types}"
             )
 
-        sensor_classes = cls._sensor_registry[sensor_type]
+        sensor_config = cls._sensor_registry[sensor_type]
         variant = "fake" if settings.MOCK_SENSORS else "real"
-        sensor_class = sensor_classes[variant]
+        module_path, class_name = sensor_config[variant]
+
+        module = __import__(module_path, fromlist=[class_name])
+        sensor_class = getattr(module, class_name)
 
         return sensor_class()
