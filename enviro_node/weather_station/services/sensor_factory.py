@@ -18,12 +18,12 @@ class SensorFactory:
 
     _sensor_registry: dict[SensorType, dict[str, tuple[str, str]]] = {
         SensorType.BME680: {
-            "real": ("pi_sensor.sensors.bme680", "BME680Sensor"),
-            "fake": ("pi_sensor.sensors.fake_bme680", "FakeBME680Sensor"),
+            "real": ("weather_station.sensors.bme680", "BME680Sensor"),
+            "fake": ("weather_station.sensors.fake_bme680", "FakeBME680Sensor"),
         },
         SensorType.MHZ19: {
-            "real": ("pi_sensor.sensors.mh_z19", "MHZ19Sensor"),
-            "fake": ("pi_sensor.sensors.fake_mh_z19", "FakeMHZ19Sensor"),
+            "real": ("weather_station.sensors.mh_z19", "MHZ19Sensor"),
+            "fake": ("weather_station.sensors.fake_mh_z19", "FakeMHZ19Sensor"),
         },
     }
 
