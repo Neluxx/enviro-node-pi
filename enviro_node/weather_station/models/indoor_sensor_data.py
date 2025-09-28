@@ -2,6 +2,7 @@ from typing import Any
 
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.utils import timezone
 
 TEMPERATURE_VALIDATORS = [MinValueValidator(-100), MaxValueValidator(100)]
 PERCENTAGE_VALIDATORS = [MinValueValidator(0), MaxValueValidator(100)]  # In percentage
@@ -29,5 +30,5 @@ class IndoorSensorData(models.Model):
             "humidity": self.humidity,
             "pressure": self.pressure,
             "co2": self.co2,
-            "created_at": self.created_at.isoformat(),
+            "created_at": timezone.localtime(self.created_at).isoformat(),
         }
