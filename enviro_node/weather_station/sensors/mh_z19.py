@@ -12,7 +12,7 @@ class MHZ19Sensor(BaseSensor):
     def get_data(self) -> dict[str, float]:
         """Get CO2 concentration data"""
         try:
-            sensor_data = mh_z19.read_all()
+            sensor_data = mh_z19.read(serial_console_untouched=True)
 
             if sensor_data is None or "co2" not in sensor_data:
                 raise RuntimeError("Invalid sensor data received")
