@@ -14,8 +14,10 @@ class SensorRepository:
     def find_unsubmitted_data(self) -> QuerySet[IndoorSensorData]:
         return IndoorSensorData.objects.filter(submitted_at=None).order_by("created_at")
 
-    def mark_as_submitted(self, queryset: QuerySet[IndoorSensorData]) -> int:
-        return queryset.update(submitted_at=timezone.now())
+    def mark_as_submitted(self, ids: list[int]) -> int:
+        return IndoorSensorData.objects.filter(id__in=ids).update(
+            submitted_at=timezone.now()
+        )
 
     def insert(self, data: dict[str, float]) -> None:
         try:
