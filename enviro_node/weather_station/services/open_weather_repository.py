@@ -16,8 +16,10 @@ class OpenWeatherRepository:
             "created_at"
         )
 
-    def mark_as_submitted(self, queryset: QuerySet[OutdoorWeatherData]) -> int:
-        return queryset.update(submitted_at=timezone.now())
+    def mark_as_submitted(self, ids: list[int]) -> int:
+        return OutdoorWeatherData.objects.filter(id__in=ids).update(
+            submitted_at=timezone.now()
+        )
 
     def insert(self, data: dict) -> None:
         try:
