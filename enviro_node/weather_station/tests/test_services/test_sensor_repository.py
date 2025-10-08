@@ -10,7 +10,7 @@ class SensorRepositoryTest(TestCase):
 
     def setUp(self) -> None:
         self.repository = SensorRepository()
-        self.valid_sensor_data = {
+        self.valid_data = {
             "temperature": 22.5,
             "humidity": 45.0,
             "pressure": 1013.25,
@@ -83,17 +83,15 @@ class SensorRepositoryTest(TestCase):
     def test_insert_creates_record_with_valid_data(self) -> None:
         initial_count = IndoorSensorData.objects.count()
 
-        self.repository.insert(self.valid_sensor_data)
+        self.repository.insert(self.valid_data)
 
         self.assertEqual(IndoorSensorData.objects.count(), initial_count + 1)
 
         record = IndoorSensorData.objects.latest("created_at")
-        self.assertEqual(
-            float(record.temperature), self.valid_sensor_data["temperature"]
-        )
-        self.assertEqual(float(record.humidity), self.valid_sensor_data["humidity"])
-        self.assertEqual(float(record.pressure), self.valid_sensor_data["pressure"])
-        self.assertEqual(float(record.co2), self.valid_sensor_data["co2"])
+        self.assertEqual(float(record.temperature), self.valid_data["temperature"])
+        self.assertEqual(float(record.humidity), self.valid_data["humidity"])
+        self.assertEqual(float(record.pressure), self.valid_data["pressure"])
+        self.assertEqual(float(record.co2), self.valid_data["co2"])
         self.assertIsNone(record.submitted_at)
 
     def test_insert_does_not_create_record_when_missing_temperature(self) -> None:
