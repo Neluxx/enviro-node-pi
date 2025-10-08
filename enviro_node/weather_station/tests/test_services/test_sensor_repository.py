@@ -6,9 +6,9 @@ from weather_station.services import SensorRepository
 
 
 class SensorRepositoryTest(TestCase):
-    fixtures = ['sensor_data.json']
+    fixtures = ["sensor_data.json"]
 
-    def setUp(self):
+    def setUp(self) -> None:
         self.repository = SensorRepository()
         self.valid_sensor_data = {
             "temperature": 22.5,
@@ -17,14 +17,14 @@ class SensorRepositoryTest(TestCase):
             "co2": 400.0,
         }
 
-    def test_find_unsubmitted_data_returns_empty_queryset(self):
+    def test_find_unsubmitted_data_returns_empty_queryset(self) -> None:
         IndoorSensorData.objects.all().delete()
 
         result = self.repository.find_unsubmitted_data()
 
         self.assertEqual(result.count(), 0)
 
-    def test_find_unsubmitted_data_returns_unsubmitted_records(self):
+    def test_find_unsubmitted_data_returns_unsubmitted_records(self) -> None:
         result = self.repository.find_unsubmitted_data()
 
         self.assertEqual(result.count(), 3)
@@ -32,18 +32,18 @@ class SensorRepositoryTest(TestCase):
             self.assertIsNone(record.submitted_at)
 
         result_ids = [r.id for r in result]
-        self.assertIn(1, result_ids)
-        self.assertIn(2, result_ids)
         self.assertIn(3, result_ids)
+        self.assertIn(4, result_ids)
+        self.assertIn(5, result_ids)
 
-    def test_find_unsubmitted_data_ordered_by_created_at(self):
+    def test_find_unsubmitted_data_ordered_by_created_at(self) -> None:
         result = list(self.repository.find_unsubmitted_data())
 
-        self.assertEqual(result[0].id, 1)
-        self.assertEqual(result[1].id, 2)
-        self.assertEqual(result[2].id, 3)
+        self.assertEqual(result[0].id, 3)
+        self.assertEqual(result[1].id, 4)
+        self.assertEqual(result[2].id, 5)
 
-    def test_mark_as_submitted_updates_records_with_ids(self):
+    def test_mark_as_submitted_updates_records_with_ids(self) -> None:
         ids_to_submit = [1, 2]
 
         before_update = timezone.now()
@@ -60,38 +60,43 @@ class SensorRepositoryTest(TestCase):
         self.assertIsNotNone(record2.submitted_at)
         self.assertIsNone(record3.submitted_at)
 
+        assert record1.submitted_at is not None
+        assert record2.submitted_at is not None
+
         self.assertGreaterEqual(record1.submitted_at, before_update)
         self.assertLessEqual(record1.submitted_at, after_update)
         self.assertGreaterEqual(record2.submitted_at, before_update)
         self.assertLessEqual(record2.submitted_at, after_update)
 
-    def test_mark_as_submitted_returns_zero_when_no_matching_ids(self):
+    def test_mark_as_submitted_returns_zero_when_no_matching_ids(self) -> None:
         non_existent_ids = [9999, 10000]
 
         updated_count = self.repository.mark_as_submitted(non_existent_ids)
 
         self.assertEqual(updated_count, 0)
 
-    def test_mark_as_submitted_with_empty_list(self):
+    def test_mark_as_submitted_with_empty_list(self) -> None:
         updated_count = self.repository.mark_as_submitted([])
 
         self.assertEqual(updated_count, 0)
 
-    def test_insert_creates_record_with_valid_data(self):
+    def test_insert_creates_record_with_valid_data(self) -> None:
         initial_count = IndoorSensorData.objects.count()
 
         self.repository.insert(self.valid_sensor_data)
 
         self.assertEqual(IndoorSensorData.objects.count(), initial_count + 1)
 
-        record = IndoorSensorData.objects.latest('created_at')
-        self.assertEqual(float(record.temperature), self.valid_sensor_data["temperature"])
+        record = IndoorSensorData.objects.latest("created_at")
+        self.assertEqual(
+            float(record.temperature), self.valid_sensor_data["temperature"]
+        )
         self.assertEqual(float(record.humidity), self.valid_sensor_data["humidity"])
         self.assertEqual(float(record.pressure), self.valid_sensor_data["pressure"])
         self.assertEqual(float(record.co2), self.valid_sensor_data["co2"])
         self.assertIsNone(record.submitted_at)
 
-    def test_insert_does_not_create_record_when_missing_temperature(self):
+    def test_insert_does_not_create_record_when_missing_temperature(self) -> None:
         invalid_data = {
             "humidity": 45.0,
             "pressure": 1013.25,
@@ -103,7 +108,7 @@ class SensorRepositoryTest(TestCase):
 
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)
 
-    def test_insert_does_not_create_record_when_missing_humidity(self):
+    def test_insert_does_not_create_record_when_missing_humidity(self) -> None:
         invalid_data = {
             "temperature": 22.5,
             "pressure": 1013.25,
@@ -115,7 +120,7 @@ class SensorRepositoryTest(TestCase):
 
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)
 
-    def test_insert_does_not_create_record_when_missing_pressure(self):
+    def test_insert_does_not_create_record_when_missing_pressure(self) -> None:
         invalid_data = {
             "temperature": 22.5,
             "humidity": 45.0,
@@ -127,7 +132,7 @@ class SensorRepositoryTest(TestCase):
 
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)
 
-    def test_insert_does_not_create_record_when_missing_co2(self):
+    def test_insert_does_not_create_record_when_missing_co2(self) -> None:
         invalid_data = {
             "temperature": 22.5,
             "humidity": 45.0,
@@ -139,7 +144,7 @@ class SensorRepositoryTest(TestCase):
 
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)
 
-    def test_insert_does_not_create_record_with_empty_dict(self):
+    def test_insert_does_not_create_record_with_empty_dict(self) -> None:
         initial_count = IndoorSensorData.objects.count()
 
         self.repository.insert({})

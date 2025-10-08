@@ -3,11 +3,11 @@
     "model": "weather_station.indoorsensordata",
     "pk": 1,
     "fields": {
-      "temperature": 20.0,
-      "humidity": 50.0,
-      "pressure": 1013.0,
-      "co2": 450.0,
-      "submitted_at": null,
+      "temperature": 20.3,
+      "humidity": 54.7,
+      "pressure": 1013.8,
+      "co2": 456.9,
+      "submitted_at": "2025-10-03T08:10:00Z",
       "created_at": "2025-10-03T08:00:00Z"
     }
   },
@@ -15,11 +15,11 @@
     "model": "weather_station.indoorsensordata",
     "pk": 2,
     "fields": {
-      "temperature": 21.0,
-      "humidity": 51.0,
-      "pressure": 1014.0,
-      "co2": 451.0,
-      "submitted_at": null,
+      "temperature": 21.7,
+      "humidity": 51.6,
+      "pressure": 1014.7,
+      "co2": 451.4,
+      "submitted_at": "2025-10-03T09:10:00Z",
       "created_at": "2025-10-03T09:00:00Z"
     }
   },
@@ -27,10 +27,10 @@
     "model": "weather_station.indoorsensordata",
     "pk": 3,
     "fields": {
-      "temperature": 22.0,
-      "humidity": 52.0,
-      "pressure": 1015.0,
-      "co2": 452.0,
+      "temperature": 22.2,
+      "humidity": 52.3,
+      "pressure": 1015.8,
+      "co2": 452.1,
       "submitted_at": null,
       "created_at": "2025-10-03T10:00:00Z"
     }
@@ -39,11 +39,11 @@
     "model": "weather_station.indoorsensordata",
     "pk": 4,
     "fields": {
-      "temperature": 23.0,
-      "humidity": 53.0,
-      "pressure": 1016.0,
-      "co2": 453.0,
-      "submitted_at": "2025-10-03T10:30:00Z",
+      "temperature": 23.9,
+      "humidity": 53.3,
+      "pressure": 1016.2,
+      "co2": 453.8,
+      "submitted_at": null,
       "created_at": "2025-10-03T10:15:00Z"
     }
   },
@@ -51,11 +51,11 @@
     "model": "weather_station.indoorsensordata",
     "pk": 5,
     "fields": {
-      "temperature": 24.0,
-      "humidity": 54.0,
-      "pressure": 1017.0,
-      "co2": 454.0,
-      "submitted_at": "2025-10-03T11:00:00Z",
+      "temperature": 24.3,
+      "humidity": 54.5,
+      "pressure": 1017.8,
+      "co2": 454.6,
+      "submitted_at": null,
       "created_at": "2025-10-03T10:45:00Z"
     }
   }
