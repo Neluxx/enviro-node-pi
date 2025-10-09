@@ -133,102 +133,156 @@ class SensorRepositoryTest(TestCase):
         self.assertEqual(int(record.clouds), self.valid_data["clouds"]["all"])
         self.assertIsNone(record.submitted_at)
 
-    def test_insert_does_not_create_record_when_missing_temperature(self) -> None:
-        invalid_data = {
-            "main": {
-                "feels_like": 19.1,
-                "temp_min": 18.3,
-                "temp_max": 20.4,
-                "humidity": 62,
-                "pressure": 1016,
-            },
-            "weather": [
-                {
-                    "main": "Clouds",
-                    "description": "few clouds",
-                    "icon": "02d",
-                }
-            ],
-            "visibility": 10000,
-            "wind": {
-                "speed": 3.2,
-                "deg": 240,
-            },
-            "clouds": {
-                "all": 20,
-            },
-        }
+    def test_insert_does_not_create_record_when_missing_temp(self) -> None:
+        invalid_data = self.valid_data.copy()
+        del invalid_data["main"]["temp"]
         initial_count = OutdoorWeatherData.objects.count()
 
-        self.repository.insert(invalid_data)
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
 
         self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Missing required field: 'temp'", cm.output[0])
+
+    def test_insert_does_not_create_record_when_missing_feels_like(self) -> None:
+        invalid_data = self.valid_data.copy()
+        del invalid_data["main"]["feels_like"]
+        initial_count = OutdoorWeatherData.objects.count()
+
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
+
+        self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Missing required field: 'feels_like'", cm.output[0])
+
+    def test_insert_does_not_create_record_when_missing_temp_min(self) -> None:
+        invalid_data = self.valid_data.copy()
+        del invalid_data["main"]["temp_min"]
+        initial_count = OutdoorWeatherData.objects.count()
+
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
+
+        self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Missing required field: 'temp_min'", cm.output[0])
+
+    def test_insert_does_not_create_record_when_missing_temp_max(self) -> None:
+        invalid_data = self.valid_data.copy()
+        del invalid_data["main"]["temp_max"]
+        initial_count = OutdoorWeatherData.objects.count()
+
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
+
+        self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Missing required field: 'temp_max'", cm.output[0])
 
     def test_insert_does_not_create_record_when_missing_humidity(self) -> None:
-        invalid_data = {
-            "main": {
-                "temp": 19.5,
-                "feels_like": 19.1,
-                "temp_min": 18.3,
-                "temp_max": 20.4,
-                "pressure": 1016,
-            },
-            "weather": [
-                {
-                    "main": "Clouds",
-                    "description": "few clouds",
-                    "icon": "02d",
-                }
-            ],
-            "visibility": 10000,
-            "wind": {
-                "speed": 3.2,
-                "deg": 240,
-            },
-            "clouds": {
-                "all": 20,
-            },
-        }
+        invalid_data = self.valid_data.copy()
+        del invalid_data["main"]["humidity"]
         initial_count = OutdoorWeatherData.objects.count()
 
-        self.repository.insert(invalid_data)
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
 
         self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Missing required field: 'humidity'", cm.output[0])
 
     def test_insert_does_not_create_record_when_missing_pressure(self) -> None:
-        invalid_data = {
-            "main": {
-                "temp": 19.5,
-                "feels_like": 19.1,
-                "temp_min": 18.3,
-                "temp_max": 20.4,
-                "humidity": 62,
-            },
-            "weather": [
-                {
-                    "main": "Clouds",
-                    "description": "few clouds",
-                    "icon": "02d",
-                }
-            ],
-            "visibility": 10000,
-            "wind": {
-                "speed": 3.2,
-                "deg": 240,
-            },
-            "clouds": {
-                "all": 20,
-            },
-        }
+        invalid_data = self.valid_data.copy()
+        del invalid_data["main"]["pressure"]
         initial_count = OutdoorWeatherData.objects.count()
 
-        self.repository.insert(invalid_data)
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
 
         self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Missing required field: 'pressure'", cm.output[0])
+
+    def test_insert_does_not_create_record_when_missing_weather_main(self) -> None:
+        invalid_data = self.valid_data.copy()
+        del invalid_data["weather"][0]["main"]
+        initial_count = OutdoorWeatherData.objects.count()
+
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
+
+        self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Missing required field: 'main'", cm.output[0])
+
+    def test_insert_does_not_create_record_when_missing_weather_description(
+        self,
+    ) -> None:
+        invalid_data = self.valid_data.copy()
+        del invalid_data["weather"][0]["description"]
+        initial_count = OutdoorWeatherData.objects.count()
+
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
+
+        self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Missing required field: 'description'", cm.output[0])
+
+    def test_insert_does_not_create_record_when_missing_weather_icon(self) -> None:
+        invalid_data = self.valid_data.copy()
+        del invalid_data["weather"][0]["icon"]
+        initial_count = OutdoorWeatherData.objects.count()
+
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
+
+        self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Missing required field: 'icon'", cm.output[0])
+
+    def test_insert_does_not_create_record_when_missing_visibility(self) -> None:
+        invalid_data = self.valid_data.copy()
+        del invalid_data["visibility"]
+        initial_count = OutdoorWeatherData.objects.count()
+
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
+
+        self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Missing required field: 'visibility'", cm.output[0])
+
+    def test_insert_does_not_create_record_when_missing_wind_speed(self) -> None:
+        invalid_data = self.valid_data.copy()
+        del invalid_data["wind"]["speed"]
+        initial_count = OutdoorWeatherData.objects.count()
+
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
+
+        self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Missing required field: 'speed'", cm.output[0])
+
+    def test_insert_does_not_create_record_when_missing_wind_deg(self) -> None:
+        invalid_data = self.valid_data.copy()
+        del invalid_data["wind"]["deg"]
+        initial_count = OutdoorWeatherData.objects.count()
+
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
+
+        self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Missing required field: 'deg'", cm.output[0])
+
+    def test_insert_does_not_create_record_when_missing_clouds(self) -> None:
+        invalid_data = self.valid_data.copy()
+        del invalid_data["clouds"]["all"]
+        initial_count = OutdoorWeatherData.objects.count()
+
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
+
+        self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Missing required field: 'all'", cm.output[0])
 
     def test_insert_does_not_create_record_with_empty_dict(self) -> None:
         initial_count = OutdoorWeatherData.objects.count()
 
-        self.repository.insert({})
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert({})
 
         self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Missing required field: 'main'", cm.output[0])
