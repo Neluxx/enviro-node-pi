@@ -9,9 +9,6 @@ logger = logging.getLogger(__name__)
 class FakeBME680Sensor(BaseSensor):
     """Fake BME680 sensor for testing and development"""
 
-    def __init__(self) -> None:
-        logger.info("Fake BME680 sensor initialized")
-
     def get_data(self) -> dict[str, float]:
         """Generate realistic fake environmental data"""
         base_temp = 22.0
