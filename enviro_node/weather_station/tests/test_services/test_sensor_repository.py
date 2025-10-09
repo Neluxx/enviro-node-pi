@@ -140,7 +140,7 @@ class SensorRepositoryTest(TestCase):
 
     def test_insert_does_not_create_record_when_invalid_temperature(self) -> None:
         invalid_data = self.valid_data.copy()
-        invalid_data["temperature"] = "invalid"
+        invalid_data["temperature"] = "invalid" # type: ignore
         initial_count = IndoorSensorData.objects.count()
 
         with self.assertLogs("weather_station.services", level="ERROR") as cm:
@@ -152,7 +152,7 @@ class SensorRepositoryTest(TestCase):
 
     def test_insert_does_not_create_record_when_invalid_humidity(self) -> None:
         invalid_data = self.valid_data.copy()
-        invalid_data["humidity"] = "invalid"
+        invalid_data["humidity"] = "invalid" # type: ignore
         initial_count = IndoorSensorData.objects.count()
 
         with self.assertLogs("weather_station.services", level="ERROR") as cm:
@@ -164,7 +164,7 @@ class SensorRepositoryTest(TestCase):
 
     def test_insert_does_not_create_record_when_invalid_pressure(self) -> None:
         invalid_data = self.valid_data.copy()
-        invalid_data["pressure"] = "invalid"
+        invalid_data["pressure"] = "invalid" # type: ignore
         initial_count = IndoorSensorData.objects.count()
 
         with self.assertLogs("weather_station.services", level="ERROR") as cm:
@@ -176,7 +176,7 @@ class SensorRepositoryTest(TestCase):
 
     def test_insert_does_not_create_record_when_invalid_co2(self) -> None:
         invalid_data = self.valid_data.copy()
-        invalid_data["co2"] = "invalid"
+        invalid_data["co2"] = "invalid" # type: ignore
         initial_count = IndoorSensorData.objects.count()
 
         with self.assertLogs("weather_station.services", level="ERROR") as cm:
