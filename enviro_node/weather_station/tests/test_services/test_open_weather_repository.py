@@ -278,6 +278,126 @@ class SensorRepositoryTest(TestCase):
         self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
         self.assertIn("Missing required field: 'all'", cm.output[0])
 
+    def test_insert_does_not_create_record_when_invalid_temp(self) -> None:
+        invalid_data = self.valid_data.copy()
+        invalid_data["main"]["temp"] = "invalid"
+        initial_count = OutdoorWeatherData.objects.count()
+
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
+
+        self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Data validation failed:", cm.output[0])
+        self.assertIn("temp", cm.output[0])
+
+    def test_insert_does_not_create_record_when_invalid_feels_like(self) -> None:
+        invalid_data = self.valid_data.copy()
+        invalid_data["main"]["feels_like"] = "invalid"
+        initial_count = OutdoorWeatherData.objects.count()
+
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
+
+        self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Data validation failed:", cm.output[0])
+        self.assertIn("feels_like", cm.output[0])
+
+    def test_insert_does_not_create_record_when_invalid_temp_min(self) -> None:
+        invalid_data = self.valid_data.copy()
+        invalid_data["main"]["temp_min"] = "invalid"
+        initial_count = OutdoorWeatherData.objects.count()
+
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
+
+        self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Data validation failed:", cm.output[0])
+        self.assertIn("temp_min", cm.output[0])
+
+    def test_insert_does_not_create_record_when_invalid_temp_max(self) -> None:
+        invalid_data = self.valid_data.copy()
+        invalid_data["main"]["temp_max"] = "invalid"
+        initial_count = OutdoorWeatherData.objects.count()
+
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
+
+        self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Data validation failed:", cm.output[0])
+        self.assertIn("temp_max", cm.output[0])
+
+    def test_insert_does_not_create_record_when_invalid_humidity(self) -> None:
+        invalid_data = self.valid_data.copy()
+        invalid_data["main"]["humidity"] = "invalid"
+        initial_count = OutdoorWeatherData.objects.count()
+
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
+
+        self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Data validation failed:", cm.output[0])
+        self.assertIn("humidity", cm.output[0])
+
+    def test_insert_does_not_create_record_when_invalid_pressure(self) -> None:
+        invalid_data = self.valid_data.copy()
+        invalid_data["main"]["pressure"] = "invalid"
+        initial_count = OutdoorWeatherData.objects.count()
+
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
+
+        self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Data validation failed:", cm.output[0])
+        self.assertIn("pressure", cm.output[0])
+
+    def test_insert_does_not_create_record_when_invalid_visibility(self) -> None:
+        invalid_data = self.valid_data.copy()
+        invalid_data["visibility"] = "invalid"
+        initial_count = OutdoorWeatherData.objects.count()
+
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
+
+        self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Data validation failed:", cm.output[0])
+        self.assertIn("visibility", cm.output[0])
+
+    def test_insert_does_not_create_record_when_invalid_wind_speed(self) -> None:
+        invalid_data = self.valid_data.copy()
+        invalid_data["wind"]["speed"] = "invalid"
+        initial_count = OutdoorWeatherData.objects.count()
+
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
+
+        self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Data validation failed:", cm.output[0])
+        self.assertIn("speed", cm.output[0])
+
+    def test_insert_does_not_create_record_when_invalid_wind_deg(self) -> None:
+        invalid_data = self.valid_data.copy()
+        invalid_data["wind"]["deg"] = "invalid"
+        initial_count = OutdoorWeatherData.objects.count()
+
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
+
+        self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Data validation failed:", cm.output[0])
+        self.assertIn("deg", cm.output[0])
+
+    def test_insert_does_not_create_record_when_invalid_clouds(self) -> None:
+        invalid_data = self.valid_data.copy()
+        invalid_data["clouds"]["all"] = "invalid"
+        initial_count = OutdoorWeatherData.objects.count()
+
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
+
+        self.assertEqual(OutdoorWeatherData.objects.count(), initial_count)
+        self.assertIn("Data validation failed:", cm.output[0])
+        self.assertIn("clouds", cm.output[0])
+
     def test_insert_does_not_create_record_with_empty_dict(self) -> None:
         initial_count = OutdoorWeatherData.objects.count()
 
