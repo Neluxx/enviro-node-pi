@@ -95,11 +95,8 @@ class SensorRepositoryTest(TestCase):
         self.assertIsNone(record.submitted_at)
 
     def test_insert_does_not_create_record_when_missing_temperature(self) -> None:
-        invalid_data = {
-            "humidity": 45.0,
-            "pressure": 1013.25,
-            "co2": 400.0,
-        }
+        invalid_data = self.valid_data.copy()
+        del invalid_data["temperature"]
         initial_count = IndoorSensorData.objects.count()
 
         self.repository.insert(invalid_data)
@@ -107,11 +104,8 @@ class SensorRepositoryTest(TestCase):
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)
 
     def test_insert_does_not_create_record_when_missing_humidity(self) -> None:
-        invalid_data = {
-            "temperature": 22.5,
-            "pressure": 1013.25,
-            "co2": 400.0,
-        }
+        invalid_data = self.valid_data.copy()
+        del invalid_data["humidity"]
         initial_count = IndoorSensorData.objects.count()
 
         self.repository.insert(invalid_data)
@@ -119,11 +113,8 @@ class SensorRepositoryTest(TestCase):
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)
 
     def test_insert_does_not_create_record_when_missing_pressure(self) -> None:
-        invalid_data = {
-            "temperature": 22.5,
-            "humidity": 45.0,
-            "co2": 400.0,
-        }
+        invalid_data = self.valid_data.copy()
+        del invalid_data["pressure"]
         initial_count = IndoorSensorData.objects.count()
 
         self.repository.insert(invalid_data)
@@ -131,11 +122,44 @@ class SensorRepositoryTest(TestCase):
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)
 
     def test_insert_does_not_create_record_when_missing_co2(self) -> None:
-        invalid_data = {
-            "temperature": 22.5,
-            "humidity": 45.0,
-            "pressure": 1013.25,
-        }
+        invalid_data = self.valid_data.copy()
+        del invalid_data["co2"]
+        initial_count = IndoorSensorData.objects.count()
+
+        self.repository.insert(invalid_data)
+
+        self.assertEqual(IndoorSensorData.objects.count(), initial_count)
+
+    def test_insert_does_not_create_record_when_invalid_temperature(self) -> None:
+        invalid_data = self.valid_data.copy()
+        invalid_data["temperature"] = "invalid"
+        initial_count = IndoorSensorData.objects.count()
+
+        self.repository.insert(invalid_data)
+
+        self.assertEqual(IndoorSensorData.objects.count(), initial_count)
+
+    def test_insert_does_not_create_record_when_invalid_humidity(self) -> None:
+        invalid_data = self.valid_data.copy()
+        invalid_data["humidity"] = "invalid"
+        initial_count = IndoorSensorData.objects.count()
+
+        self.repository.insert(invalid_data)
+
+        self.assertEqual(IndoorSensorData.objects.count(), initial_count)
+
+    def test_insert_does_not_create_record_when_invalid_pressure(self) -> None:
+        invalid_data = self.valid_data.copy()
+        invalid_data["pressure"] = "invalid"
+        initial_count = IndoorSensorData.objects.count()
+
+        self.repository.insert(invalid_data)
+
+        self.assertEqual(IndoorSensorData.objects.count(), initial_count)
+
+    def test_insert_does_not_create_record_when_invalid_co2(self) -> None:
+        invalid_data = self.valid_data.copy()
+        invalid_data["co2"] = "invalid"
         initial_count = IndoorSensorData.objects.count()
 
         self.repository.insert(invalid_data)
