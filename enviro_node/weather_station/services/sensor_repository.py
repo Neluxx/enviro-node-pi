@@ -28,6 +28,6 @@ class SensorRepository:
                 co2=data["co2"],
             ).save()
         except KeyError as e:
-            logger.warning(f"Missing required sensor field: {e}")
+            logger.error(f"Missing required sensor field: {e}")
         except ValidationError as e:
             logger.error(f"Sensor data validation failed: {e}")

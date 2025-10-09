@@ -99,7 +99,7 @@ class SensorRepositoryTest(TestCase):
         del invalid_data["temperature"]
         initial_count = IndoorSensorData.objects.count()
 
-        with self.assertLogs("weather_station.services", level="WARNING") as cm:
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
             self.repository.insert(invalid_data)
 
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)
@@ -110,7 +110,7 @@ class SensorRepositoryTest(TestCase):
         del invalid_data["humidity"]
         initial_count = IndoorSensorData.objects.count()
 
-        with self.assertLogs("weather_station.services", level="WARNING") as cm:
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
             self.repository.insert(invalid_data)
 
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)
@@ -121,7 +121,7 @@ class SensorRepositoryTest(TestCase):
         del invalid_data["pressure"]
         initial_count = IndoorSensorData.objects.count()
 
-        with self.assertLogs("weather_station.services", level="WARNING") as cm:
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
             self.repository.insert(invalid_data)
 
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)
@@ -132,7 +132,7 @@ class SensorRepositoryTest(TestCase):
         del invalid_data["co2"]
         initial_count = IndoorSensorData.objects.count()
 
-        with self.assertLogs("weather_station.services", level="WARNING") as cm:
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
             self.repository.insert(invalid_data)
 
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)
@@ -189,7 +189,7 @@ class SensorRepositoryTest(TestCase):
     def test_insert_does_not_create_record_with_empty_dict(self) -> None:
         initial_count = IndoorSensorData.objects.count()
 
-        with self.assertLogs("weather_station.services", level="WARNING") as cm:
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
             self.repository.insert({})
 
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)

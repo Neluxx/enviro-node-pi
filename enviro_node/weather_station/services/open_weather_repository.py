@@ -39,6 +39,6 @@ class OpenWeatherRepository:
                 clouds=data["clouds"]["all"],
             ).save()
         except KeyError as e:
-            logger.warning(f"Missing required sensor field: {e}")
+            logger.error(f"Missing required field: {e}")
         except ValidationError as e:
-            logger.error(f"Sensor data validation failed: {e}")
+            logger.error(f"Data validation failed: {e}")
