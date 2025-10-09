@@ -99,76 +99,98 @@ class SensorRepositoryTest(TestCase):
         del invalid_data["temperature"]
         initial_count = IndoorSensorData.objects.count()
 
-        self.repository.insert(invalid_data)
+        with self.assertLogs("weather_station.services", level="WARNING") as cm:
+            self.repository.insert(invalid_data)
 
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)
+        self.assertIn("Missing required sensor field: 'temperature'", cm.output[0])
 
     def test_insert_does_not_create_record_when_missing_humidity(self) -> None:
         invalid_data = self.valid_data.copy()
         del invalid_data["humidity"]
         initial_count = IndoorSensorData.objects.count()
 
-        self.repository.insert(invalid_data)
+        with self.assertLogs("weather_station.services", level="WARNING") as cm:
+            self.repository.insert(invalid_data)
 
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)
+        self.assertIn("Missing required sensor field: 'humidity'", cm.output[0])
 
     def test_insert_does_not_create_record_when_missing_pressure(self) -> None:
         invalid_data = self.valid_data.copy()
         del invalid_data["pressure"]
         initial_count = IndoorSensorData.objects.count()
 
-        self.repository.insert(invalid_data)
+        with self.assertLogs("weather_station.services", level="WARNING") as cm:
+            self.repository.insert(invalid_data)
 
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)
+        self.assertIn("Missing required sensor field: 'pressure'", cm.output[0])
 
     def test_insert_does_not_create_record_when_missing_co2(self) -> None:
         invalid_data = self.valid_data.copy()
         del invalid_data["co2"]
         initial_count = IndoorSensorData.objects.count()
 
-        self.repository.insert(invalid_data)
+        with self.assertLogs("weather_station.services", level="WARNING") as cm:
+            self.repository.insert(invalid_data)
 
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)
+        self.assertIn("Missing required sensor field: 'co2'", cm.output[0])
 
     def test_insert_does_not_create_record_when_invalid_temperature(self) -> None:
         invalid_data = self.valid_data.copy()
         invalid_data["temperature"] = "invalid"
         initial_count = IndoorSensorData.objects.count()
 
-        self.repository.insert(invalid_data)
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
 
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)
+        self.assertIn("Sensor data validation failed:", cm.output[0])
+        self.assertIn("temperature", cm.output[0])
 
     def test_insert_does_not_create_record_when_invalid_humidity(self) -> None:
         invalid_data = self.valid_data.copy()
         invalid_data["humidity"] = "invalid"
         initial_count = IndoorSensorData.objects.count()
 
-        self.repository.insert(invalid_data)
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
 
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)
+        self.assertIn("Sensor data validation failed:", cm.output[0])
+        self.assertIn("humidity", cm.output[0])
 
     def test_insert_does_not_create_record_when_invalid_pressure(self) -> None:
         invalid_data = self.valid_data.copy()
         invalid_data["pressure"] = "invalid"
         initial_count = IndoorSensorData.objects.count()
 
-        self.repository.insert(invalid_data)
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
 
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)
+        self.assertIn("Sensor data validation failed:", cm.output[0])
+        self.assertIn("pressure", cm.output[0])
 
     def test_insert_does_not_create_record_when_invalid_co2(self) -> None:
         invalid_data = self.valid_data.copy()
         invalid_data["co2"] = "invalid"
         initial_count = IndoorSensorData.objects.count()
 
-        self.repository.insert(invalid_data)
+        with self.assertLogs("weather_station.services", level="ERROR") as cm:
+            self.repository.insert(invalid_data)
 
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)
+        self.assertIn("Sensor data validation failed:", cm.output[0])
+        self.assertIn("co2", cm.output[0])
 
     def test_insert_does_not_create_record_with_empty_dict(self) -> None:
         initial_count = IndoorSensorData.objects.count()
 
-        self.repository.insert({})
+        with self.assertLogs("weather_station.services", level="WARNING") as cm:
+            self.repository.insert({})
 
         self.assertEqual(IndoorSensorData.objects.count(), initial_count)
+        self.assertIn("Missing required sensor field: 'temperature'", cm.output[0])
