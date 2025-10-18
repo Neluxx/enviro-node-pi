@@ -23,7 +23,6 @@ class SensorReader:
             try:
                 sensor = SensorFactory.create_sensor(sensor_type)
                 self.sensors[sensor_type] = sensor
-                logger.info(f"Initialized {sensor_type.value} sensor")
             except Exception as e:
                 logger.error(f"Failed to initialize {sensor_type.value} sensor: {e}")
 
