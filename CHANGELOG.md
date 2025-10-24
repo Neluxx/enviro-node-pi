@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+### Dependencies
+
+## [v1.0.0](https://github.com/Neluxx/enviro-node-pi/releases/tag/v1.0.0) - 2025-10-24
+
+### Added
+
 - Sensor Integration
   - Add support for BME680 sensor to collect temperature, humidity, and pressure data
   - Add support for MH-Z19 sensor to collect CO2 concentration data
@@ -26,15 +42,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Logging
   - Add rotating file handler for error logging with size limits
-
-### Changed
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
-
-### Dependencies
