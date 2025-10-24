@@ -22,10 +22,7 @@ class IndoorSensorDataTestCase(TestCase):
 
     def test_to_dict_without_co2(self) -> None:
         sensor_data = IndoorSensorData.objects.create(
-            temperature=21.5,
-            humidity=55.0,
-            pressure=1015.0,
-            co2=None
+            temperature=21.5, humidity=55.0, pressure=1015.0, co2=None
         )
         result = sensor_data.to_dict()
 
