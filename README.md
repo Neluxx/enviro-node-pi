@@ -1,34 +1,125 @@
-# Raspberry PI Weather Station
+# Enviro Node Pi
 
-The project consists of realising a small weather station with a Raspberry Pi.
+A Django-based environmental monitoring system for Raspberry Pi that collects indoor sensor data, retrieves outdoor weather information, and submits all data to a central EnviroHub API for analysis and visualization.
 
-Two sensors were used to take indoor measurements. One is the [BME680](https://www.berrybase.ch/bme680-breakout-board-4in1-sensor-fuer-temperatur-luftfeuchtigkeit-luftdruck-und-luftguete), which measures the temperature, humidity and air pressure, and the other is the [MH-Z19](https://www.berrybase.ch/mh-z19c-infrarot-co2-sensor-pinleiste), which measures the CO2 concentration in the air.
+## Features
 
-There is also an API to [OpenWeatherMap](https://openweathermap.org/), which can be used to collect weather data for a defined specified outdoor location.
+### Indoor Environmental Monitoring
+- **[BME680](https://www.berrybase.ch/bme680-breakout-board-4in1-sensor-fuer-temperatur-luftfeuchtigkeit-luftdruck-und-luftguete) Sensor Integration**: Collects temperature, humidity, and air pressure measurements
+- **[MH-Z19](https://www.berrybase.ch/mh-z19c-infrarot-co2-sensor-pinleiste) Sensor Integration**: Monitors CO2 concentration levels
+- **Automated Data Collection**: Django management commands for scheduled sensor readings
 
-A command can be used to record the sensor data, which is then saved in a database. If the CO2 limit value is exceeded, an e-mail is automatically sent via [ElasticEmail](https://elasticemail.com/) with a request for ventilation.
+### Outdoor Weather Data
+- **[OpenWeatherMap](https://openweathermap.org/) API Integration**: Retrieves current weather conditions for configured locations
+- **Automated Weather Updates**: Scheduled commands to fetch and store outdoor weather data
 
-There is also a command that calls the OpenWeatherMap API and saves the result in the database.
+### Data Submission & Synchronization
+- **EnviroHub Client**: Automatic batch submission of sensor and weather data to central API
+- **Batch Processing**: Configurable batch sizes (default: 1000 records) for efficient data transfer
+- **Submission Tracking**: Maintains submission status to prevent duplicate uploads
+- **Error Handling**: Comprehensive logging with rotating file handlers
 
-In future, it should be possible to create diagrams from the data collected in the database. These should visualise indoor and outdoor weather data and thus allow conclusions to be drawn about air quality or similar.
+---
 
 ## Prerequisites
 
-- Install [Git](https://git-scm.com/downloads)
-- Install [Python](https://www.python.org/downloads/)
+- Git
+- Python 3.11+ (Installed in Pi OS Bookworm)
+- Virtual environment (e.g. `virtualenv`)
+- Raspberry Pi (Tested on Raspberry Pi 3B+)
+  - BME680 Sensor (temperature, humidity, and air pressure)
+  - MH-Z19 Sensor (CO2 concentration)
 
 ## Installation
 
-- Clone the repository `git clone https://github.com/Neluxx/raspberrypi-weather-station.git`
-- Go into the project directory `cd raspberrypi-weather-station`
-- Setup the project `pip install -r requirements.txt`
+1. **Clone repository**
+   ```bash
+   git clone https://github.com/Neluxx/enviro-node-pi.git
+   cd enviro-node-pi
+   ```
 
-## Usage
+2. **Setup virtual environment**
+   ```bash
+   python -m venv venv --system-site-packages
+   source venv/bin/activate
+   ```
 
-- Go into the django project directory `cd raspberrypi-weather-station/enviro_node`
-- Run the project `python manage.py runserver`
-- Visit [Localhost](http://127.0.0.1:8000/)
+3. **Install dependencies**
+   ```bash
+   # For development (includes testing tools):
+   pip install -r requirements-dev.txt
+
+   # For production:
+   pip install -r requirements-prod.txt
+   ```
+
+4. **Configure environment variables**
+   ```bash
+   cd enviro_node
+   cp .env.example .env
+
+   nano .env # Edit .env with your API keys and configuration
+   ```
+
+5. **Run database migrations**
+   ```bash
+   python manage.py migrate
+   ```
+
+### Management Commands
+
+#### Collect Sensor Data
+   ```bash
+python manage.py sensor_data_collector
+   ```
+
+#### Retrieve OpenWeather Data
+   ```bash
+python manage.py open_weather_data_retriever
+   ```
+
+#### Submit Sensor Data
+```bash
+python manage.py sensor_data_submitter
+```
+
+#### Submit OpenWeather Data
+```bash
+python manage.py open_weather_data_submitter
+```
+
+---
+
+## Development
+
+### Running Test Suite
+```bash
+python manage.py test
+```
+
+### Code Coverage Report
+```bash
+coverage run manage.py test
+coverage report # Generates report in terminal
+coverage html # Generates HTML report in ./htmlcov/
+```
+
+### Code Quality Check
+```bash
+pre-commit install
+pre-commit run --all-files
+```
+
+---
+
+## Changelog
+
+See [CHANGELOG](https://github.com/Neluxx/enviro-node-pi/blob/main/CHANGELOG.md) for version history and updates.
 
 ## Support
 
-Please [open an issue](https://github.com/Neluxx/raspberrypi-weather-station/issues/new) for support.
+Please [open an issue](https://github.com/Neluxx/enviro-node-pi/issues/new) for support.
+
+## License
+
+See [LICENSE](https://github.com/Neluxx/enviro-node-pi/blob/main/LICENSE) for details.
