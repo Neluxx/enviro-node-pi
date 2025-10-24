@@ -25,7 +25,7 @@ class SensorRepository:
                 temperature=data["temperature"],
                 humidity=data["humidity"],
                 pressure=data["pressure"],
-                co2=data["co2"],
+                co2=data.get("co2"),
             ).save()
         except KeyError as e:
             logger.error(f"Missing required sensor field: {e}")
