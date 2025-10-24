@@ -19,3 +19,17 @@ class IndoorSensorDataTestCase(TestCase):
                 "created_at": "2025-10-03T10:00:00+02:00",
             },
         )
+
+    def test_to_dict_without_co2(self) -> None:
+        sensor_data = IndoorSensorData.objects.create(
+            temperature=21.5,
+            humidity=55.0,
+            pressure=1015.0,
+            co2=None
+        )
+        result = sensor_data.to_dict()
+
+        self.assertNotIn("co2", result)
+        self.assertEqual(result["temperature"], 21.5)
+        self.assertEqual(result["humidity"], 55.0)
+        self.assertEqual(result["pressure"], 1015.0)
