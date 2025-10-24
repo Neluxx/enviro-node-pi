@@ -60,9 +60,6 @@ class SensorRepositoryTest(TestCase):
         self.assertIsNotNone(record2.submitted_at)
         self.assertIsNone(record3.submitted_at)
 
-        assert record1.submitted_at is not None
-        assert record2.submitted_at is not None
-
         self.assertGreaterEqual(record1.submitted_at, before_update)
         self.assertLessEqual(record1.submitted_at, after_update)
         self.assertGreaterEqual(record2.submitted_at, before_update)
