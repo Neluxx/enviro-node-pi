@@ -1,5 +1,5 @@
 -r requirements.txt
 
 # Sensors
-bme680~=1.1 # Consider upgrading to version 2.0
+bme680~=2.0
 mh_z19~=3.1
