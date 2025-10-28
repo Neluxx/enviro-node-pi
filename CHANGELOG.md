@@ -10,7 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 ### Changed
-- Make MH-Z19 CO2 value optional and disable validation when missing [#3](https://github.com/Neluxx/enviro-node-pi/issues/3)
 
 ### Deprecated
 
@@ -19,6 +18,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 ### Security
+
+### Dependencies
+
+## [v1.1.0](https://github.com/Neluxx/enviro-node-pi/releases/tag/v1.1.0) - 2025-10-28
+
+### Changed
+- Make MH-Z19 CO2 value optional and disable validation when missing [#3](https://github.com/Neluxx/enviro-node-pi/issues/3)
 
 ### Dependencies
 - Update bme680 from 1.1.1 to 2.0.0 major [#5](https://github.com/Neluxx/enviro-node-pi/issues/5)
