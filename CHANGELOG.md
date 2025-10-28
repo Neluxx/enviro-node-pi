@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 
 ### Dependencies
+- Update bme680 from 1.1.1 to 2.0.0 major [#5](https://github.com/Neluxx/enviro-node-pi/issues/5)
 
 ## [v1.0.0](https://github.com/Neluxx/enviro-node-pi/releases/tag/v1.0.0) - 2025-10-24
 
