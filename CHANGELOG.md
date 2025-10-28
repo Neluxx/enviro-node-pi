@@ -18,9 +18,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 ### Security
-- Remove the logging of sensitive information [#3](https://github.com/Neluxx/enviro-node-pi/security/code-scanning/3)
 
 ### Dependencies
+
+## [v1.1.1](https://github.com/Neluxx/enviro-node-pi/releases/tag/v1.1.1) - 2025-10-28
+
+### Security
+- Remove the logging of sensitive information [#3](https://github.com/Neluxx/enviro-node-pi/security/code-scanning/3)
 
 ## [v1.1.0](https://github.com/Neluxx/enviro-node-pi/releases/tag/v1.1.0) - 2025-10-28
 
