@@ -29,7 +29,6 @@ class BaseHttpClient(ABC):
         """Make an HTTP request with error handling and logging."""
         try:
             logger.info(f"HTTP Request: {method} {url}")
-            logger.info(f"Request params: {params}")
             logger.info(f"Request data: {json_data}")
 
             response = self.session.request(
