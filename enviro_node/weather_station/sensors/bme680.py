@@ -13,6 +13,8 @@ class BME680Sensor(BaseSensor):
     https://learn.pimoroni.com/article/getting-started-with-bme680-breakout
     """
 
+    TEMPERATURE_OFFSET = -3
+
     def __init__(self) -> None:
         """Initialize and configure the BME680 sensor"""
         try:
@@ -21,6 +23,7 @@ class BME680Sensor(BaseSensor):
             self.sensor.set_pressure_oversample(bme680.OS_4X)
             self.sensor.set_temperature_oversample(bme680.OS_8X)
             self.sensor.set_filter(bme680.FILTER_SIZE_3)
+            self.sensor.set_temp_offset(self.TEMPERATURE_OFFSET)
             logger.info("BME680 sensor initialized successfully")
 
         except Exception as e:
