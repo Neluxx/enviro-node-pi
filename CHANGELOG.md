@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Add a temperature offset by -3 degrees Celsius to the BME680 sensor [#9](https://github.com/Neluxx/enviro-node-pi/issues/9)
 
 ### Changed
 
