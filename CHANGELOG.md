@@ -14,14 +14,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 
 ### Removed
-- Remove migration which manipulates temperature data [#11](https://github.com/Neluxx/enviro-node-pi/issues/11)
 
 ### Fixed
-- Set temperature offset inside get_data method of the BME680 sensor [#11](https://github.com/Neluxx/enviro-node-pi/issues/11)
 
 ### Security
 
 ### Dependencies
+
+## [v1.2.1](https://github.com/Neluxx/enviro-node-pi/releases/tag/v1.2.1) - 2025-10-31
+
+### Removed
+- Remove migration which manipulates temperature data [#11](https://github.com/Neluxx/enviro-node-pi/issues/11)
+
+### Fixed
+- Set temperature offset inside get_data method of the BME680 sensor [#11](https://github.com/Neluxx/enviro-node-pi/issues/11)
 
 ## [v1.2.0](https://github.com/Neluxx/enviro-node-pi/releases/tag/v1.2.0) - 2025-10-29
 
