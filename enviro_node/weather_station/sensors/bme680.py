@@ -23,7 +23,6 @@ class BME680Sensor(BaseSensor):
             self.sensor.set_pressure_oversample(bme680.OS_4X)
             self.sensor.set_temperature_oversample(bme680.OS_8X)
             self.sensor.set_filter(bme680.FILTER_SIZE_3)
-            self.sensor.set_temp_offset(self.TEMPERATURE_OFFSET)
             logger.info("BME680 sensor initialized successfully")
 
         except Exception as e:
@@ -33,6 +32,7 @@ class BME680Sensor(BaseSensor):
     def get_data(self) -> dict[str, float]:
         """Get temperature, humidity, and pressure data"""
         try:
+            self.sensor.set_temp_offset(self.TEMPERATURE_OFFSET)
             if self.sensor.get_sensor_data():
                 return {
                     "temperature": round(self.sensor.data.temperature, 2),
