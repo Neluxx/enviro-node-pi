@@ -12,14 +12,20 @@ logger = logging.getLogger(__name__)
 class OpenWeatherRepository:
 
     def find_unsubmitted_data(self) -> QuerySet[OutdoorWeatherData]:
-        return OutdoorWeatherData.objects.filter(submitted_at=None).order_by(
+        return OutdoorWeatherData.objects.filter(submitted_at__isnull=True).order_by(
             "created_at"
         )
+
+    def find_submitted_data(self) -> QuerySet[OutdoorWeatherData]:
+        return OutdoorWeatherData.objects.filter(submitted_at__isnull=False)
 
     def mark_as_submitted(self, ids: list[int]) -> int:
         return OutdoorWeatherData.objects.filter(id__in=ids).update(
             submitted_at=timezone.now()
         )
+
+    def mark_as_unsubmitted(self, ids: list[int]) -> int:
+        return OutdoorWeatherData.objects.filter(id__in=ids).update(submitted_at=None)
 
     def insert(self, data: dict) -> None:
         try:
