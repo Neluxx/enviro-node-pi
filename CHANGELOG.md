@@ -8,8 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Add command to reset sensor data [#13](https://github.com/Neluxx/enviro-node-pi/issues/13)
-- Add command to reset open weather data [#13](https://github.com/Neluxx/enviro-node-pi/issues/13)
 
 ### Changed
 
@@ -22,6 +20,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 
 ### Dependencies
+
+## [v1.3.0](https://github.com/Neluxx/enviro-node-pi/releases/tag/v1.3.0) - 2025-11-10
+
+### Added
+- Add command to reset sensor data [#13](https://github.com/Neluxx/enviro-node-pi/issues/13)
+- Add command to reset open weather data [#13](https://github.com/Neluxx/enviro-node-pi/issues/13)
 
 ## [v1.2.1](https://github.com/Neluxx/enviro-node-pi/releases/tag/v1.2.1) - 2025-10-31
 
