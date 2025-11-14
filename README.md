@@ -88,6 +88,16 @@ python manage.py sensor_data_submitter
 python manage.py open_weather_data_submitter
 ```
 
+#### Reset Sensor Data
+```bash
+python manage.py sensor_data_resetter
+```
+
+#### Reset OpenWeather Data
+```bash
+python manage.py open_weather_data_resetter
+```
+
 ---
 
 ## Development
