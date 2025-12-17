@@ -1,5 +1,6 @@
 from typing import Any
 
+from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils import timezone
@@ -26,6 +27,7 @@ class IndoorSensorData(models.Model):
     def to_dict(self) -> dict:
         """Return model data as a dictionary with JSON-serializable datetime strings"""
         result = {
+            "uuid": settings.NODE_UUID,
             "temperature": self.temperature,
             "humidity": self.humidity,
             "pressure": self.pressure,
