@@ -34,6 +34,7 @@ SECRET_KEY = env("SECRET")
 # Set environment variables
 API_KEY = env("API_KEY")
 CITY_NAME = env("CITY_NAME")
+NODE_UUID = env("NODE_UUID")
 BASE_URL = env("BASE_URL")
 BEARER_TOKEN = env("BEARER_TOKEN")
 VERIFY_SSL = env.bool("VERIFY_SSL", default=False)
