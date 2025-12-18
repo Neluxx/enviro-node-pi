@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-from weather_station.models import IndoorSensorData, OutdoorWeatherData
+from weather_station.models import IndoorSensorData
 
 admin.site.register(IndoorSensorData)
-admin.site.register(OutdoorWeatherData)
