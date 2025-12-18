@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Add UUID to identify the node on the hub site [#15](https://github.com/Neluxx/enviro-node-pi/issues/15)
 
 ### Changed
 
