@@ -9,10 +9,6 @@ A Django-based environmental monitoring system for Raspberry Pi that collects in
 - **[MH-Z19](https://www.berrybase.ch/mh-z19c-infrarot-co2-sensor-pinleiste) Sensor Integration**: Monitors CO2 concentration levels
 - **Automated Data Collection**: Django management commands for scheduled sensor readings
 
-### Outdoor Weather Data
-- **[OpenWeatherMap](https://openweathermap.org/) API Integration**: Retrieves current weather conditions for configured locations
-- **Automated Weather Updates**: Scheduled commands to fetch and store outdoor weather data
-
 ### Data Submission & Synchronization
 - **EnviroHub Client**: Automatic batch submission of sensor and weather data to central API
 - **Batch Processing**: Configurable batch sizes (default: 1000 records) for efficient data transfer
@@ -73,29 +69,14 @@ A Django-based environmental monitoring system for Raspberry Pi that collects in
 python manage.py sensor_data_collector
    ```
 
-#### Retrieve OpenWeather Data
-   ```bash
-python manage.py open_weather_data_retriever
-   ```
-
 #### Submit Sensor Data
 ```bash
 python manage.py sensor_data_submitter
 ```
 
-#### Submit OpenWeather Data
-```bash
-python manage.py open_weather_data_submitter
-```
-
 #### Reset Sensor Data
 ```bash
 python manage.py sensor_data_resetter
-```
-
-#### Reset OpenWeather Data
-```bash
-python manage.py open_weather_data_resetter
 ```
 
 ---
