@@ -1,6 +1,6 @@
 # Enviro Node Pi
 
-A Django-based environmental monitoring system for Raspberry Pi that collects indoor sensor data and submits the data to a central EnviroHub API for analysis and visualization.
+A Django-based environmental monitoring system for Raspberry Pi that collects sensor data and submits the data to a central EnviroHub API for analysis and visualization.
 
 ## Features
 
