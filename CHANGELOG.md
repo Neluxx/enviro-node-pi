@@ -8,20 +8,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Add UUID to identify the node on the hub site [#15](https://github.com/Neluxx/enviro-node-pi/issues/15)
 
 ### Changed
 
 ### Deprecated
 
 ### Removed
-- Remove OpenWeather Integration [#17](https://github.com/Neluxx/enviro-node-pi/issues/17)
 
 ### Fixed
 
 ### Security
 
 ### Dependencies
+
+## [v2.0.0](https://github.com/Neluxx/enviro-node-pi/releases/tag/v2.0.0) - 2025-12-18
+
+### Added
+- Add UUID to identify the node on the hub site [#15](https://github.com/Neluxx/enviro-node-pi/issues/15)
+
+### Removed
+- Remove OpenWeather Integration [#17](https://github.com/Neluxx/enviro-node-pi/issues/17)
 
 ## [v1.3.0](https://github.com/Neluxx/enviro-node-pi/releases/tag/v1.3.0) - 2025-11-10
 
