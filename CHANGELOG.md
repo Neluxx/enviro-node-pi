@@ -21,6 +21,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Dependencies
 
+## [v2.1.0](https://github.com/Neluxx/enviro-node-pi/releases/tag/v2.1.0) - 2026-01-11
+
+### Changed
+- Rename /api/environmental-data endpoint to /api/sensor-data
+
 ## [v2.0.0](https://github.com/Neluxx/enviro-node-pi/releases/tag/v2.0.0) - 2025-12-18
 
 ### Added
