@@ -32,7 +32,7 @@ class Command(BaseCommand):
                 logger.info(f"Unsubmitted sensor data: {sensor_data}")
 
                 logger.info("Submit sensor data to enviro hub...")
-                EnviroHubClient().submit_data("/environmental-data", sensor_data)
+                EnviroHubClient().submit_data("/sensor-data", sensor_data)
                 logger.info("Sensor data successfully submitted")
 
                 logger.info("Mark sensor data as submitted...")

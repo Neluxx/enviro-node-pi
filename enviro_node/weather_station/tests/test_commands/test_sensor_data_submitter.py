@@ -20,7 +20,7 @@ class SensorDataSubmitterTestCase(TestCase):
 
         mock_submit_data.assert_called_once()
         args, kwargs = mock_submit_data.call_args
-        self.assertEqual(args[0], "/environmental-data")
+        self.assertEqual(args[0], "/sensor-data")
         submitted_data = args[1]
         self.assertEqual(len(submitted_data), 3)
 
