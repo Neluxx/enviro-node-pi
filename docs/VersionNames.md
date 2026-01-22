@@ -7,8 +7,8 @@ Mark each used entry with the date when the entry has been used.
 The version names of this project are named after moons.
 
 ## Versions
-- Phobos
-- Deimos
+- 2025-10-24 Phobos
+- 2025-12-18 Deimos
 - Europa
 - Callisto
 - Titan
